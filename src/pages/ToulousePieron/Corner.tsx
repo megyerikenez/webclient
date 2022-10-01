@@ -1,30 +1,9 @@
-export function Corner() {
-  return (
-    <>
-      <svg
-        width="50"
-        height="50"
-        viewBox="0 0 50 50"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M32 16H18C16.8954 16 16 16.8954 16 18V32C16 33.1046 16.8954 34 18 34H32C33.1046 34 34 33.1046 34 32V18C34 16.8954 33.1046 16 32 16Z"
-          stroke="black"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <rect
-          x="8"
-          y="9.41422"
-          width="2"
-          height="11.4141"
-          rx="1"
-          transform="rotate(-45 8 9.41422)"
-          fill="black"
-        />
-      </svg>
+export function Corner(){
+    return <>
+        <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M32 16H18C16.8954 16 16 16.8954 16 18V32C16 33.1046 16.8954 34 18 34H32C33.1046 34 34 33.1046 34 32V18C34 16.8954 33.1046 16 32 16Z" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        <rect x="8" y="9.41422" width="2" height="11.4141" rx="1" transform="rotate(-45 8 9.41422)" fill="black"/>
+        </svg>
     </>
-  );
 }
+
