@@ -1,9 +1,12 @@
 import { COL_COUNT, ROW_COUNT } from './Constants';
 import { useTestStore } from './store';
 import { formatTime } from '../../util';
+import { useTranslation } from 'react-i18next';
 
 
 export function Score(){
+
+    const [t, i18n] = useTranslation('common');
 
     let store = useTestStore(state=>state);
 
@@ -42,23 +45,23 @@ export function Score(){
     return <>
         <div className='flex gap-6 pb-6 overflow-x-auto px-6 sm:px-0'>
             <div className='card text-center'>
-                <p>Teljesítmény</p>
+                <p>{t('tests.performance')}</p>
                 <p className='text-lg font-bold'>{(score*100).toFixed(2)}%</p>
             </div>
             <div className='card text-center'>
-                <p>Megtalált (zöld)</p>
+                <p>{t('tests.stats.correctlyMarked')}</p>
                 <p className='text-lg font-bold'>{correctlyMarked}</p>
             </div>
             <div className='card text-center'>
-                <p>Megtalálatlan (lila)</p>
+                <p>{t('tests.stats.incorrectlyIgnored')}</p>
                 <p className='text-lg font-bold'>{incorrectlyIgnored}</p>
             </div>
             <div className='card text-center'>
-                <p>Hibás (piros)</p>
+                <p>{t('tests.stats.incorrectlyMarked')}</p>
                 <p className='text-lg font-bold'>{incorrectlyMarked}</p>
             </div>
             <div className='card text-center'>
-                <p>Idő</p>
+                <p>{t('tests.time')}</p>
                 <p className='text-lg font-bold'>{formatTime(store.endTime.getTime() - store.startTime.getTime())}</p>
             </div>
         </div>

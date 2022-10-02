@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import { Transition } from "@headlessui/react";
+import { useTranslation } from "react-i18next";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [t, i18n] = useTranslation('common');
   return (
     <div className="sticky top-0 z-50">
       <nav className="bg-gray-800">
@@ -23,34 +25,34 @@ export default function Navbar() {
                     to={"/"}
                     className=" hover:bg-gray-700 text-gray-300 px-3 py-2 rounded-md text-sm font-medium"
                   >
-                    Kezdőlap
+                    {t('nav.home')}
                   </Link>
 
                   <Link
                     to={"/tests"}
                     className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
-                    Tesztjeim
+                    {t('nav.tests')}
                   </Link>
 
                   <Link
                     to={"/results"}
                     className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
-                    Eredményeim
+                    {t('nav.results')}
                   </Link>
 
                   <Link
                     to={"/mockup"}
                     className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
-                    MOCKUP
+                    {t('nav.mockup')}
                   </Link>
                   <Link
                     to={"/settings"}
                     className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex-end"
                   >
-                    Beállitások
+                    {t('nav.settings')}
                   </Link>
                 </div>
               </div>
@@ -63,7 +65,7 @@ export default function Navbar() {
                 aria-controls="mobile-menu"
                 aria-expanded="false"
               >
-                <span className="sr-only">Open main menu</span>
+                <span className="sr-only">{t('nav.openMenu')}</span>
                 {!isOpen ? (
                   <svg
                     className="block h-6 w-6"
@@ -118,35 +120,35 @@ export default function Navbar() {
                   to={"/"}
                   className="hover:bg-gray-700 text-white block px-3 py-2 rounded-md text-base font-medium"
                 >
-                  Kezdőlap
+                  {t('nav.home')}
                 </Link>
 
                 <Link
                   to={"/tests"}
                   className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                 >
-                  Tesztjeim
+                  {t('nav.tests')}
                 </Link>
 
                 <Link
                   to={"/results"}
                   className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                 >
-                  Eredményeim
+                  {t('nav.results')}
                 </Link>
 
                 <Link
                   to={"/mockup"}
                   className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                 >
-                  MOCKUP
+                  {t('nav.mockup')}
                 </Link>
 
                 <Link
                   to={"/settings"}
                   className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                 >
-                  Beállitások
+                  {t('nav.settings')}
                 </Link>
               </div>
             </div>

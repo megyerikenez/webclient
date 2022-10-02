@@ -1,0 +1,20 @@
+{
+    "tests":{
+        "toulousePieron": {
+            "name":"Toulouse-Piéron test"
+        },
+        "actions":{
+            "start":"Start test",
+            "end":"Submit test"
+        },
+        "timeRemaining":"Time remaining"
+    },
+    "nav":{
+        "home":"Home",
+        "tests":"Tests",
+        "results":"Results",
+        "mockup":"Mockup",
+        "settings":"Settings",
+        "openMenu":"Open navigation menu"
+    }
+}
