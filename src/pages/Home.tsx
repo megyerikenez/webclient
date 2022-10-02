@@ -4,7 +4,11 @@ function Home() {
   return (
     <>
       <Navbar />
-      <h1>home page mockup xd</h1>;
+      <main>
+        <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+          <h1>hello</h1>
+        </div>
+      </main>
     </>
   );
 }

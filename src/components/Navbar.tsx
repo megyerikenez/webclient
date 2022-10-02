@@ -1,87 +1,158 @@
 import { Link } from "react-router-dom";
-import IconApply from "../assets/icon-components/IconApply";
-import IconData from "../assets/icon-components/IconData";
-import IconHome from "../assets/icon-components/IconHome";
-import IconOutCome from "../assets/icon-components/IconOutCome";
-import IconSettings from "../assets/icon-components/IconSettings";
-import IconTest from "../assets/icon-components/IconTest";
+import React, { useState } from "react";
+import { Transition } from "@headlessui/react";
 
 export default function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
   return (
-    <div className="min-h-screen bg-gray-100">
-      <div className="sidebar min-h-screen w-[3.35rem] overflow-hidden border-r hover:w-56 hover:bg-white hover:shadow-lg">
-        <div className="flex h-screen flex-col justify-between pt-2 pb-6">
-          <div>
-            <div className="w-max p-2.5">
-              <img
-                src="https://simpact.hu/wp-content/uploads/SALVA-VITA-logo302x100.png"
-                className="w-32"
-                alt=""
-              />
-            </div>
+    <div>
+      <nav className="bg-gray-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            <div className="flex items-center">
+              <div className="flex-shrink-0">
+                <img
+                  className="h-8 w-8"
+                  src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
+                  alt="Workflow"
+                />
+              </div>
+              <div className="hidden md:block">
+                <div className="ml-10 flex items-baseline space-x-4">
+                  <Link
+                    to={"/"}
+                    className=" hover:bg-gray-700 text-gray-300 px-3 py-2 rounded-md text-sm font-medium"
+                  >
+                    Kezdőlap
+                  </Link>
 
-            <ul className="mt-6 space-y-2 tracking-wide">
-              <li className="min-w-max">
-                <Link
-                  aria-label="dashboard"
-                  to={"/"}
-                  className="relative flex items-center space-x-4 bg-gradient-to-r from-sky-600 to-cyan-400 px-4 py-3 text-white"
-                >
-                  <IconHome />
-                  <span className="-mr-1 font-medium">Főoldal</span>
-                </Link>
-              </li>
-              <li className="min-w-max">
-                <a
-                  href="#"
-                  className="bg group flex items-center space-x-4 rounded-full px-4 py-3 text-gray-600"
-                >
-                  <IconTest />
-                  <span className="group-hover:text-gray-700">Tesztjeim</span>
-                </a>
-              </li>
-              <li className="min-w-max">
-                <a
-                  href="#"
-                  className="group flex items-center space-x-4 rounded-md px-4 py-3 text-gray-600"
-                >
-                  <IconOutCome />
-                  <span className="group-hover:text-gray-700">Eredményeim</span>
-                </a>
-              </li>
-              <li className="min-w-max">
-                <a
-                  href="#"
-                  className="group flex items-center space-x-4 rounded-md px-4 py-3 text-gray-600"
-                >
-                  <IconData />
-                  <span className="group-hover:text-gray-700">Többi adat</span>
-                </a>
-              </li>
-              <li className="min-w-max">
-                <Link
-                  className="group flex items-center space-x-4 rounded-md px-4 py-3 text-gray-600"
-                  to={"/mockup"}
-                >
-                  <IconApply />
-                  <span className="group-hover:text-gray-700">
-                    Jelentkezés MockUp
-                  </span>
-                </Link>
-              </li>
-            </ul>
-          </div>
-          <div className="w-max -mb-3">
-            <a
-              href="#"
-              className="group flex items-center space-x-4 rounded-md px-4 py-3 text-gray-600"
-            >
-              <IconSettings />
-              <span className="group-hover:text-gray-700">Beállitások</span>
-            </a>
+                  <Link
+                    to={"/tests"}
+                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  >
+                    Tesztjeim
+                  </Link>
+
+                  <Link
+                    to={"/results"}
+                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  >
+                    Eredményeim
+                  </Link>
+
+                  <Link
+                    to={"/mockup"}
+                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  >
+                    MOCKUP
+                  </Link>
+                  <Link
+                    to={"/settings"}
+                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex-end"
+                  >
+                    Beállitások
+                  </Link>
+                </div>
+              </div>
+            </div>
+            <div className="-mr-2 flex md:hidden">
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                type="button"
+                className="bg-gray-900 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+                aria-controls="mobile-menu"
+                aria-expanded="false"
+              >
+                <span className="sr-only">Open main menu</span>
+                {!isOpen ? (
+                  <svg
+                    className="block h-6 w-6"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M4 6h16M4 12h16M4 18h16"
+                    />
+                  </svg>
+                ) : (
+                  <svg
+                    className="block h-6 w-6"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                )}
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+
+        <Transition
+          show={isOpen}
+          enter="transition ease-out duration-100 transform"
+          enterFrom="opacity-0 scale-95"
+          enterTo="opacity-100 scale-100"
+          leave="transition ease-in duration-75 transform"
+          leaveFrom="opacity-100 scale-100"
+          leaveTo="opacity-0 scale-95"
+        >
+          {(ref) => (
+            <div className="md:hidden" id="mobile-menu">
+              <div ref={ref} className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <Link
+                  to={"/"}
+                  className="hover:bg-gray-700 text-white block px-3 py-2 rounded-md text-base font-medium"
+                >
+                  Kezdőlap
+                </Link>
+
+                <Link
+                  to={"/tests"}
+                  className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                >
+                  Tesztjeim
+                </Link>
+
+                <Link
+                  to={"/results"}
+                  className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                >
+                  Eredményeim
+                </Link>
+
+                <Link
+                  to={"/mockup"}
+                  className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                >
+                  MOCKUP
+                </Link>
+
+                <Link
+                  to={"/settings"}
+                  className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                >
+                  Beállitások
+                </Link>
+              </div>
+            </div>
+          )}
+        </Transition>
+      </nav>
     </div>
   );
 }
