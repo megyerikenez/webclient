@@ -10,6 +10,7 @@ import { GridItem } from './ToulousePieron/GridItem';
 import shallow from 'zustand/shallow'
 import { Score } from './ToulousePieron/Score';
 import Navbar from '../components/Navbar';
+import { useTranslation } from 'react-i18next';
 
 export function ToulousePieronPage(){
     return <>
@@ -24,10 +25,13 @@ export function ToulousePieronPage(){
 }
 
 export function ToulousePieron(){
+
+    const [t, i18n] = useTranslation('common');
+
     let store = useTestStore(({startTime, endTime, hasStarted, hasEnded, endTest, startTest, pictures, picturesToFind})=>({
         startTime, endTime, hasStarted, hasEnded, endTest, startTest, pictures, picturesToFind
     }), shallow);
-
+    
     if (!store.hasStarted || store.startTime == null){
         let squares: number[] = [];
         for(let i = 0; i < 8; i++){
@@ -40,9 +44,9 @@ export function ToulousePieron(){
 
         return <>
             <div className='px-6'>
-                <h1 className='mb-6'>Toulouse-Piéron teszt</h1>
-                <p>A következő feladatban kapni fog 4 féle négyzetet, azokat kell megtalálnia, és bejelölnie (kattintással).</p>
-                <p>Összesen 8 fajta négyzet van, azok az alábbi módon néznek ki:</p>
+                <h1 className='mb-6'>{t('tests.toulousePieron.name')}</h1>
+                <p>{t('tests.toulousePieron.description.1')}</p>
+                <p>{t('tests.toulousePieron.description.2')}</p>
                 <div className='my-2'>
                     { squares.map((index)=>{
                         return <>
@@ -50,13 +54,13 @@ export function ToulousePieron(){
                         </>
                     }) }
                 </div>
-                <p>A feladat megoldására 5 perc áll rendelkezésre.</p>
+                <p>{t('tests.toulousePieron.description.3')}</p>
                 <button
                     className='mt-6 button-primary'
                     onClick={()=>{
                         store.startTest();
                     }}
-                >Kezdés</button>
+                >{t('tests.actions.start')}</button>
             </div>
         </>
     }
@@ -81,7 +85,7 @@ export function ToulousePieron(){
                         <div
                             className='card text-center pb-2'
                         >
-                            <p>Az alábbi alakzatokat kell bejelölnie</p>
+                            <p>{t('tests.toulousePieron.shapesToMark')}</p>
                             { store.picturesToFind.map(pic=>{
                                 return <>
                                     <Picture value={pic} />
@@ -162,7 +166,7 @@ export function ToulousePieron(){
                         onClick={()=>{
                             store.endTest();
                         }}
-                    >Befejezés</button>
+                    >{t('tests.actions.end')}</button>
                 </>
             }
             

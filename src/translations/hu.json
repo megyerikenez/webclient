@@ -1,0 +1,36 @@
+{
+    "tests":{
+        "toulousePieron": {
+            "name":"Toulouse-Piéron teszt",
+            "shapesToMark":"Az alábbi alakzatokat kell bejelölnie",
+            "description":{
+                "1":"A következő feladatban kapni fog 4 féle négyzetet, azokat kell megtalálnia, és bejelölnie (kattintással).",
+                "2":"Összesen 8 fajta négyzet van, azok az alábbi módon néznek ki:",
+                "3":"A feladat megoldására 5 perc áll rendelkezésre."
+            }
+        },
+        "actions":{
+            "start":"Kezdés",
+            "end":"Befejezés"
+        },
+        "timeRemaining":"Hátralévő idő",
+        "performance":"Teljesítmény",
+        "time":"Idő",
+        "stats":{
+            
+            "correctlyMarked":"Megtalált (zöld)",
+            "incorrectlyMarked":"Hibás (piros)",
+            "incorrectlyIgnored":"Megtalálatlan (lila)"
+            
+        }
+    },
+
+    "nav":{
+        "home":"Kezdőlap",
+        "tests":"Tesztek",
+        "results":"Eredmények",
+        "mockup":"Mockup",
+        "settings":"Beállítások",
+        "openMenu":"Navigáiós menü megnyitása"
+    }
+}
