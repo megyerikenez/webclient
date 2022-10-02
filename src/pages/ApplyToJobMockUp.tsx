@@ -1,3 +1,4 @@
+import MockForm from "../components/MockForm";
 import Navbar from "../components/Navbar";
 
 function ApplyToJobMockup() {
@@ -5,8 +6,8 @@ function ApplyToJobMockup() {
     <>
       <Navbar />
       <main>
-        <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-          <h1>Mockup form</h1>
+        <div className="w-100 min-h-screen   mx-auto flex items-center justify-center  bg-indigo-500 overflow-hidden">
+          <MockForm />
         </div>
       </main>
     </>

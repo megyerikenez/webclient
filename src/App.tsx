@@ -4,8 +4,8 @@ import Home from "./pages/Home";
 import ApplyToJobMockup from "./pages/ApplyToJobMockUp";
 import { ToulousePieronPage } from "./pages/ToulousePieron";
 import Settings from "./pages/Settings";
-import Results from "./pages/ApplyToJobMockUp copy";
 import Tests from "./pages/Tests";
+import Results from "./pages/Results";
 
 function App() {
   return (
