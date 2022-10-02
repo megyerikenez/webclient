@@ -1,6 +1,6 @@
 import { COL_COUNT, ROW_COUNT } from './Constants';
 import { useTestStore } from './store';
-import { formatTime } from './util';
+import { formatTime } from '../../util';
 
 
 export function Score(){
@@ -40,11 +40,27 @@ export function Score(){
     let score = (pictureCount - (incorrectlyIgnored+incorrectlyMarked))/pictureCount;
 
     return <>
-        <div>Ennyi időt töltött a teszt kitöltésével: {formatTime(store.endTime.getTime() - store.startTime.getTime())}</div>
-        <div className='text-green-900 font-bold'>Megtalált: {correctlyMarked}</div>
-        <div className='text-purple-900 font-bold'>Megtalálatlan: {incorrectlyIgnored}</div>
-        <div className='text-rose-900 font-bold'>Helytelenül jelölt: {incorrectlyMarked}</div>
-        {/* <div>Helyesen jelöletlen: {correctlyIgnored}</div> */}
-        <div>Teljesítmény: {(score*100).toFixed(2)}%</div>
+        <div className='flex gap-6 pb-6 overflow-x-auto px-6 sm:px-0'>
+            <div className='card text-center'>
+                <p>Teljesítmény</p>
+                <p className='text-lg font-bold'>{(score*100).toFixed(2)}%</p>
+            </div>
+            <div className='card text-center'>
+                <p>Megtalált (zöld)</p>
+                <p className='text-lg font-bold'>{correctlyMarked}</p>
+            </div>
+            <div className='card text-center'>
+                <p>Megtalálatlan (lila)</p>
+                <p className='text-lg font-bold'>{incorrectlyIgnored}</p>
+            </div>
+            <div className='card text-center'>
+                <p>Hibás (piros)</p>
+                <p className='text-lg font-bold'>{incorrectlyMarked}</p>
+            </div>
+            <div className='card text-center'>
+                <p>Idő</p>
+                <p className='text-lg font-bold'>{formatTime(store.endTime.getTime() - store.startTime.getTime())}</p>
+            </div>
+        </div>
     </>
 }

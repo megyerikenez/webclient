@@ -2,7 +2,7 @@ import create from 'zustand';
 import produce from 'immer';
 
 import { COL_COUNT, MAX_TIME, ROW_COUNT } from './Constants';
-import { randomInt } from './util';
+import { randomInt } from '../../util';
 
 interface SelectedEntry {
     row: number;

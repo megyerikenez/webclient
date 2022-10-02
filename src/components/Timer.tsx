@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import { MAX_TIME } from "./Constants";
-import { formatTime } from "./util";
+import { formatTime } from "../util";
 
-export function Timer(props: {startTime: Date}){
+export function Timer(props: {startTime: Date, maxTime: number}){
 
     function getDiff(){
         return Date.now() - props.startTime.getTime();
@@ -20,7 +19,7 @@ export function Timer(props: {startTime: Date}){
         }
     })
 
-    let timeForTask = MAX_TIME;
+    let timeForTask = props.maxTime;
     let timeLeft = timeForTask - diff;
 
     if (timeLeft < 0){
@@ -29,12 +28,9 @@ export function Timer(props: {startTime: Date}){
 
     return <>
         <div
+            className="card"
             style={{
-                position: 'sticky',
                 display: 'inline-block',
-                top: 0,
-                margin: '0 auto',
-                zIndex: 1,
                 textAlign: 'center',
             }}
         >

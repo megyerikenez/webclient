@@ -2,8 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
 @layer components {
-  .sidebar{
+  .sidebar {
     transition:all .4s ease-in-out;
+  }
+  .card {
+    @apply font-normal
+    p-4 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md text-gray-700
+    /*dark:bg-gray-800 dark:border-gray-700 dark:text-gray-200*/
+    contrast-more:bg-black contrast-more:text-yellow-300 contrast-more:border-yellow-300 contrast-more:border-2
+  }
+  .button-primary {
+    @apply text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none focus:ring-4 focus:ring-blue-300
+    contrast-more:bg-yellow-300 contrast-more:hover:bg-yellow-300 contrast-more:text-black contrast-more:font-bold contrast-more:focus:ring-white
+  }
+  
+  h1 {
+    @apply text-2xl font-bold;
+  }
+  h2 {
+    @apply text-xl font-bold;
+  }
+  h3 {
+    @apply text-lg font-bold;
   }
 }

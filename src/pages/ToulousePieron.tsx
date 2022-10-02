@@ -3,12 +3,25 @@ import { COL_COUNT, MAX_TIME, ROW_COUNT } from './ToulousePieron/Constants';
 import { Corner } from './ToulousePieron/Corner';
 import { Side } from './ToulousePieron/Side';
 import { useTestStore } from './ToulousePieron/store';
-import { formatTime } from './ToulousePieron/util';
+import { formatTime } from '../util';
 import { Picture } from './ToulousePieron/Picture';
-import { Timer } from './ToulousePieron/Timer';
+import { Timer } from '../components/Timer';
 import { GridItem } from './ToulousePieron/GridItem';
 import shallow from 'zustand/shallow'
 import { Score } from './ToulousePieron/Score';
+import Navbar from '../components/Navbar';
+
+export function ToulousePieronPage(){
+    return <>
+      <Navbar />
+      <main>
+        <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+          <ToulousePieron />
+        </div>
+      </main>
+    
+    </>
+}
 
 export function ToulousePieron(){
     let store = useTestStore(({startTime, endTime, hasStarted, hasEnded, endTest, startTest, pictures, picturesToFind})=>({
@@ -26,10 +39,11 @@ export function ToulousePieron(){
         }
 
         return <>
-            <div>
+            <div className='px-6'>
+                <h1 className='mb-6'>Toulouse-Piéron teszt</h1>
                 <p>A következő feladatban kapni fog 4 féle négyzetet, azokat kell megtalálnia, és bejelölnie (kattintással).</p>
                 <p>Összesen 8 fajta négyzet van, azok az alábbi módon néznek ki:</p>
-                <div>
+                <div className='my-2'>
                     { squares.map((index)=>{
                         return <>
                             <Picture value={index} />
@@ -38,7 +52,7 @@ export function ToulousePieron(){
                 </div>
                 <p>A feladat megoldására 5 perc áll rendelkezésre.</p>
                 <button
-                    className='text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none'
+                    className='mt-6 button-primary'
                     onClick={()=>{
                         store.startTest();
                     }}
@@ -57,25 +71,68 @@ export function ToulousePieron(){
                 </>
                 :
                 <>
-                    <Timer startTime={store.startTime} />
+                    <div
+                        style={{
+                            flexDirection: 'row',
+                            alignItems: 'start'
+                        }}
+                        className='flex mb-6 gap-6 mx-6 sm:mx-0'
+                    >
+                        <div
+                            className='card text-center pb-2'
+                        >
+                            <p>Az alábbi alakzatokat kell bejelölnie</p>
+                            { store.picturesToFind.map(pic=>{
+                                return <>
+                                    <Picture value={pic} />
+                                </>
+                            }) }
+                        </div>
+                        <Timer startTime={store.startTime} maxTime={MAX_TIME} />
+                    </div>
                 </>
             }
 
             
-            <div>
-                { store.picturesToFind.map(pic=>{
-                    return <>
-                        <Picture value={pic} />
-                    </>
-                }) }
-            </div>
+            
             <div
                 style={{
                     display: 'flex',
-                    flexDirection: 'column',
-                    gap: 5,
+                    flexDirection: 'row',
+                    alignItems: 'stretch',
                 }}
             >
+                <div
+                    style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: 5,
+                    }}
+                >
+                    {store.pictures.map((row, index)=>{
+                        return <>
+                        <span
+                            className='font-sm w-8'
+                            style={{
+                                display: 'flex',
+                                flexShrink: 0,
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                flexGrow: 1,
+                            }}
+                        >{index+1}</span>
+                        </>
+                    })}
+                </div>
+
+                <div
+                    style={{
+                        overflowX: 'auto',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: 5,
+                    }}
+                >
                 { store.pictures.map((row, index)=>{
                     return <div
                         style={{
@@ -83,16 +140,6 @@ export function ToulousePieron(){
                             gap: 5,
                         }}
                     >
-                        <span
-                            style={{
-                                display: 'flex',
-                                width: '30px',
-                                fontSize: '15px',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                            }}
-                        >{index+1}</span>
-
                         {
                             row.map((col, colIndex)=>{
                                 return <GridItem row={index} column={colIndex} />
@@ -100,6 +147,7 @@ export function ToulousePieron(){
                         }
                     </div>
                 }) }
+                </div>
             </div>
         </div>
         <div>
@@ -110,7 +158,7 @@ export function ToulousePieron(){
                 :
                 <>
                     <button
-                        className='text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none'
+                        className='mx-6 sm:mx-0 mt-6 button-primary'
                         onClick={()=>{
                             store.endTest();
                         }}
