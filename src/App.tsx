@@ -18,7 +18,7 @@ function App() {
         <Route path="/tests" element={<Tests />} />
         <Route path="/results" element={<Results />} />
         <Route path="/settings" element={<Settings />} />
-        <Route path="/mockup" element={<ApplyToJobMockup />} />
+        <Route path="/signup" element={<ApplyToJobMockup />} />
         <Route path="/tests/toulouse-pieron" element={<ToulousePieronPage />} />
       </Routes>
     </I18nextProvider>

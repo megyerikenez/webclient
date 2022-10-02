@@ -25,11 +25,18 @@
         }
     },
 
+    "mockupForm":{
+        "firstName":"Keresztnév",
+        "lastName":"Vezetéknév",
+        "email":"Email cím",
+        "submit":"Jelentkezés"
+    },
+
     "nav":{
         "home":"Kezdőlap",
         "tests":"Tesztek",
         "results":"Eredmények",
-        "mockup":"Mockup",
+        "mockup":"Jelentkezés",
         "settings":"Beállítások",
         "openMenu":"Navigáiós menü megnyitása"
     }

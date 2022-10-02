@@ -1,84 +1,72 @@
-const axios = require("axios").default;
-
-const submitHandler = async (e: any) => {
-  e.preventDefault();
-  axios.defaults.headers.post["Content-Type"] =
-    "application/json;charset=utf-8";
-  axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
-  let headersList = {
-    Accept: "*/*",
-    "Content-Type": "application/json",
-  };
-  const fname = document.getElementById("Fname") as HTMLInputElement;
-  const lname = document.getElementById("Lname") as HTMLInputElement;
-  const email = document.getElementById("email") as HTMLInputElement;
-  let bodyContent = JSON.stringify({
-    firstName: fname.value,
-    lastName: lname.value,
-    email: email.value,
-    lang: "HU", // TODO state.language
-  });
-
-  let reqOptions = {
-    url: "https://api.dvpc.hu/api/register",
-    method: "POST",
-    headers: headersList,
-    data: bodyContent,
-  };
-
-  let response = await axios.request(reqOptions);
-  console.log(response);
-};
+import { FormEvent, MutableRefObject, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { sendMockupForm } from "../api";
 
 export default function MockForm() {
+  let [firstName, setFirstName] = useState("");
+  let [lastName, setLastName] = useState("");
+  let [email, setEmail] = useState("");
+  let form = useRef<HTMLFormElement>(null);
+
+  const [t, i18n] = useTranslation('common');
+
   return (
     <div className="block p-6 rounded-lg shadow-lg bg-white max-w-md">
-      <form>
+      <form
+        ref={form}
+        onSubmitCapture={(e: FormEvent)=>{
+          e.preventDefault();
+        }}
+      >
         <div className="grid grid-cols-2 gap-4">
           <div className="form-group mb-6">
             <input
               type="text"
               className="form-control
-          block
-          w-full
-          px-3
-          py-1.5
-          text-base
-          font-normal
-          text-gray-700
-          bg-white bg-clip-padding
-          border border-solid border-gray-300
-          rounded
-          transition
-          ease-in-out
-          m-0
-          focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-              aria-describedby="Fname"
-              placeholder="Vezeték név"
-              id="Fname"
+                block
+                w-full
+                px-3
+                py-1.5
+                text-base
+                font-normal
+                text-gray-700
+                bg-white bg-clip-padding
+                border border-solid border-gray-300
+                rounded
+                transition
+                ease-in-out
+                m-0
+                focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+              required
+              minLength={1}
+              placeholder={t('mockupForm.lastName')}
+              value={lastName}
+              onChange={(e)=>{setLastName(e.target.value)}}
             />
           </div>
           <div className="form-group mb-6">
             <input
               type="text"
               className="form-control
-          block
-          w-full
-          px-3
-          py-1.5
-          text-base
-          font-normal
-          text-gray-700
-          bg-white bg-clip-padding
-          border border-solid border-gray-300
-          rounded
-          transition
-          ease-in-out
-          m-0
-          focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-              id="Lname"
-              aria-describedby="Lname"
-              placeholder="Kereszt név"
+                block
+                w-full
+                px-3
+                py-1.5
+                text-base
+                font-normal
+                text-gray-700
+                bg-white bg-clip-padding
+                border border-solid border-gray-300
+                rounded
+                transition
+                ease-in-out
+                m-0
+                focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+              required
+              minLength={1}
+              placeholder={t('mockupForm.firstName')}
+              value={firstName}
+              onChange={(e)=>{setFirstName(e.target.value)}}
             />
           </div>
         </div>
@@ -100,11 +88,23 @@ export default function MockForm() {
         m-0
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             id="email"
-            placeholder="Email cím"
+            required
+            pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"
+            placeholder={t('mockupForm.email')}
+            value={email}
+            onChange={(e)=>{setEmail(e.target.value)}}
           />
         </div>
         <button
-          onClick={submitHandler}
+          onClick={()=>{
+            if (form.current?.checkValidity()){
+              sendMockupForm({
+                firstName,
+                lastName,
+                email,
+              });
+            }
+          }}
           type="submit"
           className="
       w-full
@@ -125,7 +125,7 @@ export default function MockForm() {
       duration-150
       ease-in-out"
         >
-          Jelentkezés
+          {t('mockupForm.submit')}
         </button>
       </form>
     </div>

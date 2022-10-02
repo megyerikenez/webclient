@@ -43,7 +43,7 @@ export default function Navbar() {
                   </Link>
 
                   <Link
-                    to={"/mockup"}
+                    to={"/signup"}
                     className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
                     {t('nav.mockup')}
@@ -138,7 +138,7 @@ export default function Navbar() {
                 </Link>
 
                 <Link
-                  to={"/mockup"}
+                  to={"/signup"}
                   className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                 >
                   {t('nav.mockup')}
