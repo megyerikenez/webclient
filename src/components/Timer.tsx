@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { formatTime } from "../util";
 
 export function Timer(props: {startTime: Date, maxTime: number}){
+
+    const [t, i18n] = useTranslation('common');
 
     function getDiff(){
         return Date.now() - props.startTime.getTime();
@@ -34,7 +37,7 @@ export function Timer(props: {startTime: Date, maxTime: number}){
                 textAlign: 'center',
             }}
         >
-            <div>Hátralévő idő</div>
+            <div>{t('tests.timeRemaining')}</div>
             <div>{formatTime(timeLeft)}</div>
         </div>
     </>
