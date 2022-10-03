@@ -1,5 +1,6 @@
 import { COL_COUNT, MAX_TIME, ROW_COUNT } from './Constants';
 
+import { PictureCell } from './PictureCell';
 import create from 'zustand';
 import produce from 'immer';
 import { randomInt } from '../../util';
@@ -15,34 +16,42 @@ interface TestState {
     startTime: Date | null;
     endTime: Date | null;
     picturesToFind: number[];
-    pictures: number[][];
-    selected: SelectedEntry[];
+    pictures: PictureCell[];
+    picturesRevised: number;
     startTest: () => void;
     endTest: () => void;
-    toggleSelected: (y: number, x: number) => void;
+    toggleMarked: (marked: boolean) => void;
 }
 
 
 
 function createData(){
-    function randomPicture(): number {
-        return randomInt(0,8);
+    function randomPicture(idx: number): PictureCell {
+        return {
+            pictureIdx: randomInt(0, 5),
+            positionIdx: idx,
+            revised: false,
+            marked: false,
+            selected: false
+        } as PictureCell;
     }
-    let picturesToFind: number[] = [];
-    while(picturesToFind.length !== 4){
+    let picturesToFind: number[] = [0, 2];
+    /* while(picturesToFind.length !== 4){
         let n = randomPicture();
         if (picturesToFind.includes(n)){
             continue;
         }
         picturesToFind.push(n);
-    }
+    } */
+    
+    let pictureCount = 0;
+    let pictures = new Array(200).fill(null).map(() => randomPicture(pictureCount++));   
+    pictures[0].revised = true;
+    pictures[0].selected = true;
 
-    let pictures = new Array(ROW_COUNT).fill(null).map(e=>{ // create a 20*20 grid of pictures
-        return new Array(COL_COUNT).fill(null).map(_=>randomPicture());
-    });
     return {
         picturesToFind,
-        pictures
+        pictures,
     }
 }
 
@@ -52,9 +61,10 @@ export const useTestStore = create<TestState>((set) => ({
     startTime: null,
     endTime: null,
     selected: [],
+    picturesRevised: 0,
     ...createData(),
     startTest: () => set((state) => {
-        setTimeout(()=>{
+        setTimeout(() => {
             if (!useTestStore.getState().hasEnded){
                 useTestStore.getState().endTest();
             }
@@ -66,15 +76,14 @@ export const useTestStore = create<TestState>((set) => ({
         // TODO submit test results to api
         return { hasEnded: true, endTime: new Date() };
     }),
-    toggleSelected: (row, col) => set(produce((state: TestState)=>{
-        let i = state.selected.findIndex((e)=>e.column === col && e.row === row);
-        if (i === -1){
-            state.selected.push({
-                row: row,
-                column: col,
-            })
-        } else {
-            state.selected.splice(i,1);
+    toggleMarked: (marked) => set(produce((state: TestState)=>{
+        state.pictures.map(pic => pic.selected = false);
+        let elem = state.pictures.find((e) => e.positionIdx === state.picturesRevised);
+        if (elem !== undefined){
+            elem.marked = marked;
+            elem.revised = true;
+            elem.selected = true;
+            state.picturesRevised++;
         }
     })),
     

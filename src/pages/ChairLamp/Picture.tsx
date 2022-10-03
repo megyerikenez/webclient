@@ -6,9 +6,21 @@ import Table from '../../assets/icon-test/table_restaurant_black_24dp.svg'
 
 var imgRes = [Chair, Flower, Lamp, Pizza, Table];
 
-export function Picture(props: {idx: number}) {
+export function Picture(props: {idx?: number, res?: string, revised?: boolean, selected?: boolean}) {
+    var source = "";
+    if (props.idx != undefined)
+        source = imgRes[props.idx];
+    if (props.res)
+        source = props.res;
     return <>
-        <img src={imgRes[props.idx]} />
+        <img
+        style={{
+            width: 50,
+            height: 50,
+        }}
+        className={
+            'inline p-1.5 ' + (props.revised === false ? 'opacity-25' : '')  + ' ' + (props.selected === true ? 'bg-slate-300 rounded-full' : '')
+        } src={source} />
     </>
 }
 
