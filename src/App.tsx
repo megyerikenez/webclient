@@ -1,11 +1,14 @@
 import "./css/App.css";
-import { Routes, Route, Link } from "react-router-dom";
-import Home from "./pages/Home";
+
+import { Link, Route, Routes } from "react-router-dom";
+
 import ApplyToJobMockup from "./pages/ApplyToJobMockUp";
-import { ToulousePieronPage } from "./pages/ToulousePieron";
+import ChairLampPage from "./pages/ChairLamp";
+import Home from "./pages/Home";
+import Results from "./pages/Results";
 import Settings from "./pages/Settings";
 import Tests from "./pages/Tests";
-import Results from "./pages/Results";
+import { ToulousePieronPage } from "./pages/ToulousePieron";
 
 function App() {
   return (
@@ -16,6 +19,7 @@ function App() {
       <Route path="/settings" element={<Settings />} />
       <Route path="/mockup" element={<ApplyToJobMockup />} />
       <Route path="/tests/toulouse-pieron" element={<ToulousePieronPage />} />
+      <Route path="/tests/chair-lamp" element={<ChairLampPage />} />
     </Routes>
   );
 }
