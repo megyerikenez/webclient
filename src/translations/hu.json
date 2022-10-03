@@ -9,6 +9,12 @@
                 "3":"A feladat megoldására 5 perc áll rendelkezésre."
             }
         },
+        "chairLamp":{
+            "name":"Chair-Lamp teszt"
+        },
+        "bourdon":{
+            "name":"Bourdon teszt"
+        },
         "actions":{
             "start":"Kezdés",
             "end":"Befejezés"
@@ -18,11 +24,20 @@
         "time":"Idő",
         "stats":{
             
-            "correctlyMarked":"Megtalált (zöld)",
-            "incorrectlyMarked":"Hibás (piros)",
-            "incorrectlyIgnored":"Megtalálatlan (lila)"
+            "correctlyMarked":"Megtalált",
+            "incorrectlyMarked":"Hibás",
+            "incorrectlyIgnored":"Megtalálatlan"
             
         }
+    },
+    "colors":{
+        "green":"zöld",
+        "purple":"lila",
+        "red":"piros"
+    },
+
+    "results":{
+        "noResults":"Nincsenek eredmények ehhez a teszthez."
     },
 
     "mockupForm":{
@@ -39,5 +54,7 @@
         "mockup":"Jelentkezés",
         "settings":"Beállítások",
         "openMenu":"Navigáiós menü megnyitása"
-    }
+    },
+
+    "error": "Hiba történt"
 }
