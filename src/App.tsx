@@ -3,7 +3,7 @@ import "./css/App.css";
 import { Link, Route, Routes } from "react-router-dom";
 
 import ApplyToJobMockup from "./pages/ApplyToJobMockUp";
-import ChairLampPage from "./pages/ChairLamp";
+import { ChairLampPage } from "./pages/ChairLamp";
 import Home from "./pages/Home";
 import Results from "./pages/Results";
 import Settings from "./pages/Settings";

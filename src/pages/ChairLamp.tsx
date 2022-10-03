@@ -1,20 +1,16 @@
-import '../css/ChairLamp.css'
+import { COL_COUNT, MAX_TIME, ROW_COUNT } from './ToulousePieron/Constants';
+import React, { useEffect, useState } from 'react';
 
-import { Picture, getImgRes } from './ChairLamp/Picture'
-
-import Navbar from '../components/Navbar'
-import apple from '../assets/icon-test/apple.png'
-import boot from '../assets/icon-test/boot.png'
-import flower from '../assets/icon-test/flower.png'
-import mug from '../assets/icon-test/mug.png'
+import { Corner } from './ToulousePieron/Corner';
+import { GridItem } from './ToulousePieron/GridItem';
+import Navbar from '../components/Navbar';
+import { Picture } from './ToulousePieron/Picture';
+import { Score } from './ToulousePieron/Score';
+import { Side } from './ToulousePieron/Side';
+import { Timer } from '../components/Timer';
+import { formatTime } from '../util';
 import shallow from 'zustand/shallow'
-import table from '../assets/icon-test/table.png'
-import { useTestStore } from './ToulousePieron/store'
-
-var elapsedTime = 0;
-var imgLabels = ["apple", "boot", "flower", "mug", "table"];
-var pictures: number[] = [];
-var started = false;
+import { useTestStore } from './ToulousePieron/store';
 
 export function ChairLampPage(){
     return <>
@@ -28,21 +24,33 @@ export function ChairLampPage(){
     </>
 }
 
-function ChairLamp() {
-    
+export function ChairLamp(){
     let store = useTestStore(({startTime, endTime, hasStarted, hasEnded, endTest, startTest, pictures, picturesToFind})=>({
         startTime, endTime, hasStarted, hasEnded, endTest, startTest, pictures, picturesToFind
     }), shallow);
-    
+
     if (!store.hasStarted || store.startTime == null){
-        
-        startTest();
-        store.hasStarted = true;
+        let squares: number[] = [];
+        for(let i = 0; i < 8; i++){
+            if (i % 2 == 0){
+                squares.push(i);
+            } else {
+                squares.unshift(i);
+            }
+        }
 
         return <>
             <div className='px-6'>
-                <h1 className='mb-6'>Chair-Lamp teszt</h1>
-                <p>A következő feladatban 5 féle kép közül kell a lentebb látható képeket bejelölni (kattintással).</p>
+                <h1 className='mb-6'>Toulouse-Piéron teszt</h1>
+                <p>A következő feladatban kapni fog 4 féle négyzetet, azokat kell megtalálnia, és bejelölnie (kattintással).</p>
+                <p>Összesen 8 fajta négyzet van, azok az alábbi módon néznek ki:</p>
+                <div className='my-2'>
+                    { squares.map((index)=>{
+                        return <>
+                            <Picture value={index} />
+                        </>
+                    }) }
+                </div>
                 <p>A feladat megoldására 5 perc áll rendelkezésre.</p>
                 <button
                     className='mt-6 button-primary'
@@ -52,30 +60,113 @@ function ChairLamp() {
                 >Kezdés</button>
             </div>
         </>
-
     }
 
+    let hasEnded = store.hasEnded && store.endTime;    
+
     return <>
-        <p className={started ? 'undefined' : 'hidden'}>Eltelt idő: </p>
-        <div className="test-container">
+        <div>
             {
-                pictures.map(x => {
-                    return <>
-                        {/* <img className={imgLabels[x]} alt={imgLabels[x]} src={imgRes[x]} /> */}
-                        <Picture idx={x} />
-                    </>
-                })
+                hasEnded ? <>
+                    <Score />
+                </>
+                :
+                <>
+                    <div
+                        style={{
+                            flexDirection: 'row',
+                            alignItems: 'start'
+                        }}
+                        className='flex mb-6 gap-6 mx-6 sm:mx-0'
+                    >
+                        <div
+                            className='card text-center pb-2'
+                        >
+                            <p>Az alábbi alakzatokat kell bejelölnie</p>
+                            { store.picturesToFind.map(pic=>{
+                                return <>
+                                    <Picture value={pic} />
+                                </>
+                            }) }
+                        </div>
+                        <Timer startTime={store.startTime} maxTime={MAX_TIME} />
+                    </div>
+                </>
             }
+
+            
+            
+            <div
+                style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    alignItems: 'stretch',
+                }}
+            >
+                <div
+                    style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: 5,
+                    }}
+                >
+                    {store.pictures.map((row, index)=>{
+                        return <>
+                        <span
+                            className='font-sm w-8'
+                            style={{
+                                display: 'flex',
+                                flexShrink: 0,
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                flexGrow: 1,
+                            }}
+                        >{index+1}</span>
+                        </>
+                    })}
+                </div>
+
+                <div
+                    style={{
+                        overflowX: 'auto',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: 5,
+                    }}
+                >
+                { store.pictures.map((row, index)=>{
+                    return <div
+                        style={{
+                            display: 'flex',
+                            gap: 5,
+                        }}
+                    >
+                        {
+                            row.map((col, colIndex)=>{
+                                return <GridItem row={index} column={colIndex} />
+                            })
+                        }
+                    </div>
+                }) }
+                </div>
+            </div>
         </div>
-    </>
-
+        <div>
+            {
+                hasEnded ? <>
+                
+                </>
+                :
+                <>
+                    <button
+                        className='mx-6 sm:mx-0 mt-6 button-primary'
+                        onClick={()=>{
+                            store.endTest();
+                        }}
+                    >Befejezés</button>
+                </>
+            }
+            
+        </div>
+    </>;
 }
-
-function startTest() {
-	for (let i = 0; i < 5; i++) {
-		const rand = Math.floor(Math.random() * getImgRes().length);
-		pictures.push(rand);
-	}
-}
-
-export default ChairLampPage;
