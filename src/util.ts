@@ -7,3 +7,7 @@ export function formatTime(ms: number){
 
     return `${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
 }
+
+export function formatDate(date: Date): string {
+    return date.toLocaleDateString();
+}

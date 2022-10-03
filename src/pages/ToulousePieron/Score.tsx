@@ -49,15 +49,15 @@ export function Score(){
                 <p className='text-lg font-bold'>{(score*100).toFixed(2)}%</p>
             </div>
             <div className='card text-center'>
-                <p>{t('tests.stats.correctlyMarked')}</p>
+                <p>{t('tests.stats.correctlyMarked')} ({t('colors.green')})</p>
                 <p className='text-lg font-bold'>{correctlyMarked}</p>
             </div>
             <div className='card text-center'>
-                <p>{t('tests.stats.incorrectlyIgnored')}</p>
+                <p>{t('tests.stats.incorrectlyIgnored')} ({t('colors.purple')})</p>
                 <p className='text-lg font-bold'>{incorrectlyIgnored}</p>
             </div>
             <div className='card text-center'>
-                <p>{t('tests.stats.incorrectlyMarked')}</p>
+                <p>{t('tests.stats.incorrectlyMarked')} ({t('colors.red')})</p>
                 <p className='text-lg font-bold'>{incorrectlyMarked}</p>
             </div>
             <div className='card text-center'>

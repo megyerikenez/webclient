@@ -5,11 +5,11 @@ function ApplyToJobMockup() {
   return (
     <>
       <Navbar />
-      <main>
-        <div className="w-100 min-h-screen   mx-auto flex items-center justify-center  bg-indigo-500 overflow-hidden">
+      
+        <main className="w-full min-h-screen mx-auto flex items-center justify-center bg-indigo-500 overflow-hidden absolute top-0">
           <MockForm />
-        </div>
-      </main>
+        </main>
+      
     </>
   );
 }
