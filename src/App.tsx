@@ -11,6 +11,7 @@ import Settings from "./pages/Settings";
 import Tests from "./pages/Tests";
 import { ToulousePieronPage } from "./pages/ToulousePieron";
 import { i18next } from "./i18n";
+import { BourdonPage } from "./pages/Bourdon";
 
 function App() {
 	return (
@@ -24,6 +25,7 @@ function App() {
 					<Route path="/signup" element={<ApplyToJobMockup />} />
 					<Route path="/tests/toulouse-pieron" element={<ToulousePieronPage />} />
 					<Route path="/tests/chair-lamp" element={<ChairLampPage />} />
+					<Route path="/tests/bourdon" element={<BourdonPage />} />
 				</Routes>
 			</I18nextProvider>
 		</>
