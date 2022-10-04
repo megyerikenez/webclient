@@ -12,6 +12,7 @@ import Tests from "./pages/Tests";
 import { ToulousePieronPage } from "./pages/ToulousePieron";
 import { i18next } from "./i18n";
 import { BourdonPage } from "./pages/Bourdon";
+import { AuthGuard } from "./components/AuthGuard";
 
 function App() {
 	return (
@@ -20,12 +21,12 @@ function App() {
 				<Routes>
 					<Route path="/" element={<Home />} />
 					<Route path="/tests" element={<Tests />} />
-					<Route path="/results" element={<Results />} />
+					<Route path="/results" element={<AuthGuard component={<Results />} />} />
 					<Route path="/settings" element={<Settings />} />
 					<Route path="/signup" element={<ApplyToJobMockup />} />
-					<Route path="/tests/toulouse-pieron" element={<ToulousePieronPage />} />
-					<Route path="/tests/chair-lamp" element={<ChairLampPage />} />
-					<Route path="/tests/bourdon" element={<BourdonPage />} />
+					<Route path="/tests/toulouse-pieron" element={<AuthGuard component={<ToulousePieronPage />} />} />
+					<Route path="/tests/chair-lamp" element={<AuthGuard component={<ChairLampPage />} />} />
+					<Route path="/tests/bourdon" element={<AuthGuard component={<BourdonPage />} />}  />
 				</Routes>
 			</I18nextProvider>
 		</>

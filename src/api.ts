@@ -12,7 +12,20 @@ interface MockupFormData {
     email: string;
 }
 
-function getToken(){
+function checkToken(){
+    let search = (new URLSearchParams(window.location.search));
+    let token = search.get("token");
+    if(token){
+        localStorage.setItem("token",search.get("token") as string);
+
+        window.history.pushState({},"",window.location.pathname);
+    }
+}
+checkToken();
+
+export function getToken(){
+    checkToken();
+
     return localStorage.getItem("token");
 }
 
@@ -42,22 +55,36 @@ export function calculateToulousePieronScore({incorrectlyIgnored, incorrectlyMar
     return score;
 }
 
+interface ChairLampResultItem {
+    incorrectlyMarked: number;
+    incorrectlyIgnored: number;
+    correctlyMarked: number;
+    correctlyIgnored: number;
+    picturesRevised: number,
+}
 interface ChairLampResult {
-    // TODO 
+    startTime: Date;
+    endTime: Date;
+    values: ChairLampResultItem[],
 }
 interface ToulousePieronResult {
-    startDate: Date;
-    endDate: Date;
+    startTime: Date;
+    endTime: Date;
     incorrectlyMarked: number;
     incorrectlyIgnored: number;
     correctlyMarked: number;
     correctlyIgnored: number;
 }
-
 interface BourdonResult {
-    // TODO
+    startTime: Date,
+    endTime: Date,
+    incorrectlyMarked: number,
+    incorrectlyIgnored: number,
+    correctlyMarked: number,
+    correctlyIgnored: number,
+    linesViewed: number,
+    charsViewed: number,
 }
-
 export interface Results {
     toulousePieron: ToulousePieronResult[]
     chairLamp: ChairLampResult[]
@@ -82,10 +109,10 @@ function convertUTCDateToLocalDate(date: Date): Date {
 function parseDate(date: string): Date {
     return convertUTCDateToLocalDate(new Date(date));
 }
-// @ts-ignore
+
 function fixDate(r: any){
-    r.startDate = parseDate(r.startDate);
-    r.endDate = parseDate(r.endDate);
+    r.startTime = parseDate(r.startTime);
+    r.endTime = parseDate(r.endTime);
 }
 
 /*export function getResults() {
@@ -111,24 +138,24 @@ export function getResults(){
             resolve({
                 toulousePieron:[
                     {
-                        startDate: new Date("2003-10-24"),
-                        endDate: new Date(),
+                        startTime: new Date("2003-10-24"),
+                        endTime: new Date(),
                         incorrectlyMarked: 15,
                         incorrectlyIgnored: 12,
                         correctlyMarked: 40,
                         correctlyIgnored: 30,
                     },
                     {
-                        startDate: new Date("2003-9-24"),
-                        endDate: new Date(),
+                        startTime: new Date("2003-9-24"),
+                        endTime: new Date(),
                         incorrectlyMarked: 15,
                         incorrectlyIgnored: 12,
                         correctlyMarked: 40,
                         correctlyIgnored: 30,
                     },
                     {
-                        startDate: new Date("2003-8-24"),
-                        endDate: new Date(),
+                        startTime: new Date("2003-8-24"),
+                        endTime: new Date(),
                         incorrectlyMarked: 15,
                         incorrectlyIgnored: 12,
                         correctlyMarked: 40,

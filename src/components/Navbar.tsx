@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import { Transition } from "@headlessui/react";
 import { useTranslation } from "react-i18next";
+import Logo from '../assets/salvavita.png';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,12 +16,12 @@ export default function Navbar() {
               <div className="flex-shrink-0">
                 <img
                   className="h-8 w-8"
-                  src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
-                  alt="Workflow"
+                  src={Logo}
+                  alt="Salva Vita"
                 />
               </div>
               <div className="hidden md:block">
-                <div className="ml-10 flex items-baseline space-x-4">
+                <div className="ml-6 flex items-baseline space-x-4">
                   <Link
                     to={"/"}
                     className=" hover:bg-gray-700 text-gray-300 px-3 py-2 rounded-md text-sm font-medium"
