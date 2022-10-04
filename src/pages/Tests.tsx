@@ -1,6 +1,6 @@
-import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import { useTranslation } from "react-i18next";
 
 function Tests() {
 
@@ -8,8 +8,12 @@ function Tests() {
 
   let tests = [
     {
-      name:"tests.toulousePieron.name",
-      path:"toulouse-pieron",
+        name:"tests.toulousePieron.name",
+        path:"toulouse-pieron",
+    },
+    {
+        name:"tests.chairLamp.name",
+        path:"chair-lamp",
     }
   ];
 

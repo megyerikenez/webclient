@@ -2,13 +2,9 @@ import { COL_COUNT, MAX_TIME, ROW_COUNT } from './ToulousePieron/Constants';
 import { Picture, getImgRes } from './ChairLamp/Picture';
 import React, { useEffect, useState } from 'react';
 
-import { Corner } from './ToulousePieron/Corner';
-import { GridItem } from './ToulousePieron/GridItem';
 import Navbar from '../components/Navbar';
-import { Score } from './ToulousePieron/Score';
-import { Side } from './ToulousePieron/Side';
+import { Score } from './ChairLamp/Score';
 import { Timer } from '../components/Timer';
-import { formatTime } from '../util';
 import shallow from 'zustand/shallow'
 import { useTestStore } from './ChairLamp/store';
 
@@ -89,7 +85,7 @@ export function ChairLamp(){
                             <p>Az alábbi alakzatokat kell bejelölnie</p>
                             { store.picturesToFind.map(index =>{
                                 return <>
-                                    <Picture idx={index} />
+                                    <Picture picIdx={index} />
                                 </>
                             }) }
                         </div>
@@ -133,7 +129,7 @@ export function ChairLamp(){
                 <div>
                 {
 					store.pictures.map(pic => {
-						return <Picture idx={pic.pictureIdx} revised={pic.revised} selected={pic.selected} />
+						return <Picture posIdx={pic.positionIdx} picIdx={pic.pictureIdx} revised={pic.revised} selected={pic.selected} />
 					})
 				}
                 </div>
@@ -156,7 +152,7 @@ export function ChairLamp(){
             }
             
         </div>
-		<div className='w-full fixed bottom-0 left-0 p-1 text-center bg-slate-200'>
+		<div className='w-full sticky bottom-0 left-0 p-1 text-center bg-slate-200'>
 			<button className="button-primary m-2" onClick={() => { store.toggleMarked(false) }}>Nem</button>
 			<button className="button-primary m-2" onClick={() => { store.toggleMarked(true) }}>Igen</button>
 		</div>

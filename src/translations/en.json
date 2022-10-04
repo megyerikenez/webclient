@@ -3,6 +3,9 @@
         "toulousePieron": {
             "name":"Toulouse-Piéron test"
         },
+        "chairLamp": {
+            "name":"Chair-Lamp test"
+        },
         "actions":{
             "start":"Start test",
             "end":"Submit test"

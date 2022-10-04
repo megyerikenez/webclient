@@ -1,14 +1,9 @@
-import { COL_COUNT, MAX_TIME, ROW_COUNT } from './Constants';
+import { MAX_TIME, PIC_COUNT } from './Constants';
 
 import { PictureCell } from './PictureCell';
 import create from 'zustand';
 import produce from 'immer';
 import { randomInt } from '../../util';
-
-interface SelectedEntry {
-    row: number;
-    column: number;
-}
 
 interface TestState {
     hasStarted: boolean;
@@ -36,17 +31,9 @@ function createData(){
         } as PictureCell;
     }
     let picturesToFind: number[] = [0, 2];
-    /* while(picturesToFind.length !== 4){
-        let n = randomPicture();
-        if (picturesToFind.includes(n)){
-            continue;
-        }
-        picturesToFind.push(n);
-    } */
     
     let pictureCount = 0;
-    let pictures = new Array(200).fill(null).map(() => randomPicture(pictureCount++));   
-    pictures[0].revised = true;
+    let pictures = new Array(PIC_COUNT).fill(null).map(() => randomPicture(pictureCount++));   
     pictures[0].selected = true;
 
     return {
@@ -80,10 +67,15 @@ export const useTestStore = create<TestState>((set) => ({
         state.pictures.map(pic => pic.selected = false);
         let elem = state.pictures.find((e) => e.positionIdx === state.picturesRevised);
         if (elem !== undefined){
-            elem.marked = marked;
-            elem.revised = true;
-            elem.selected = true;
+            
+            state.pictures[state.picturesRevised].marked = marked;
+            state.pictures[state.picturesRevised].revised = true;
+            if(state.picturesRevised+1 < state.pictures.length)
+                state.pictures[state.picturesRevised+1].selected = true;
+            else
+                state.endTest();
             state.picturesRevised++;
+            console.log(state.picturesRevised);
         }
     })),
     
