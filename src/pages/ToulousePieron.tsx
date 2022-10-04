@@ -54,7 +54,7 @@ export function ToulousePieron(){
                         </>
                     }) }
                 </div>
-                <p>{t('tests.toulousePieron.description.3')}</p>
+                <p>{t('tests.toulousePieron.description.time')}</p>
                 <button
                     className='mt-6 button-primary'
                     onClick={()=>{

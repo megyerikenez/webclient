@@ -41,13 +41,13 @@ export function Bourdon(){
 
         return <>
             <div className='px-6'>
-                <h1 className='mb-6'>{t('tests.toulousePieron.name')}</h1>
-                <p>{t('tests.toulousePieron.description.1')}</p>
-                <p>{t('tests.toulousePieron.description.2')}</p>
+                <h1 className='mb-6'>{t('tests.bourdon.name')}</h1>
+                <p>{t('tests.bourdon.description.1')}</p>
+                <p>{t('tests.bourdon.description.2')}</p>
                 <div className='my-2'>
                     
                 </div>
-                <p>{t('tests.toulousePieron.description.3')}</p>
+                <p>{t('tests.bourdon.description.time')}</p>
                 <button
                     className='mt-6 button-primary'
                     onClick={()=>{

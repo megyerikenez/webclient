@@ -6,14 +6,23 @@
             "description":{
                 "1":"A következő feladatban kapni fog 4 féle négyzetet, azokat kell megtalálnia, és bejelölnie (kattintással).",
                 "2":"Összesen 8 fajta négyzet van, azok az alábbi módon néznek ki:",
-                "3":"A feladat megoldására 5 perc áll rendelkezésre."
+                "time":"A feladat megoldására 5 perc áll rendelkezésre."
             }
         },
         "chairLamp":{
-            "name":"Chair-Lamp teszt"
+            "name":"Chair-Lamp teszt",
+            "shapesToMark":"Az alábbi alakzatokat kell bejelölnie",
+            "description":{
+                "time":"A feladat megoldására 5 perc áll rendelkezésre."
+            }
         },
         "bourdon":{
-            "name":"Bourdon teszt"
+            "name":"Bourdon teszt",
+            "description":{
+                "1":"A következő feladatban egy 20*20-as táblázatot fog látni benne az Angol ábécé betűivel.",
+                "2":"Az minden sor első betűje ki van emelve, ezt a betűt kell bejelölni az adott sorban.",
+                "time":"A feladat megoldására 5 perc áll rendelkezésre."
+            }
         },
         "actions":{
             "start":"Kezdés",
@@ -56,5 +65,13 @@
         "openMenu":"Navigáiós menü megnyitása"
     },
 
-    "error": "Hiba történt"
+    "error": "Hiba történt",
+    "errors":{
+        "authNeeded":"Az oldal megtekindéséhez authentikációra van szükség"
+    },
+
+    "homepage":{
+        "name":"Salva Vita Alapítvány",
+        "text":"Segítünk, hogy az elhelyezkedni vágyó fiatalok, a fogyatékkal élő álláskeresők és a cégek egymásra találjanak."
+    }
 }
