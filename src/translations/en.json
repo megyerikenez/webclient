@@ -36,14 +36,14 @@
       "incorrectlyMarked": "Incorrect",
       "incorrectlyIgnored": "Not found",
 
-      "attentionPerformance":"Attention performance",
-      "workAccuracy":"Work accuracy",
-      "mentalProductivity":"Mental productivity",
-      "mentalPerformance":"Mental performance",
-      "concentration":"Concentration",
-      "concentrationStability":"Concentration stability",
-      "visualInformationCapacity":"Capacity of visual information",
-      "processingRate":"Processing rate"
+      "attentionPerformance": "Attention performance",
+      "workAccuracy": "Work accuracy",
+      "mentalProductivity": "Mental productivity",
+      "mentalPerformance": "Mental performance",
+      "concentration": "Concentration",
+      "concentrationStability": "Concentration stability",
+      "visualInformationCapacity": "Capacity of visual information",
+      "processingRate": "Processing rate"
     }
   },
   "colors": {
@@ -80,5 +80,37 @@
   "homepage": {
     "name": "Salva Vita Endowment",
     "text": "We help - for young people looking for employment, job seekers with disabilities and companies can find each other."
+  },
+
+  "loaders": {
+    "generic": {
+      "error": "Something went wrong..."
+    },
+    "signup": {
+      "loading": "Sending...",
+      "success": "Successfully applied"
+    },
+    "test": {
+      "loading": "Sending results",
+      "success": "Successfully sent results",
+      "error": "Unsuccessfully sent result"
+    },
+    "data": {
+      "loading": "Getting data",
+      "success": "Successfully loaded",
+      "error": "Couldn't get data"
+    }
+  },
+
+  "scoreNames": {
+    "veryBad": "Very bad",
+    "bad": "bad",
+    "average": "Avarage",
+    "good": "Good",
+    "veryGood": "Very good",
+
+    "low": "Low",
+    "high": "High",
+    "veryHigh": "Very high"
   }
 }
