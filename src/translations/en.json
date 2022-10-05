@@ -1,20 +1,75 @@
 {
-    "tests":{
-        "toulousePieron": {
-            "name":"Toulouse-Piéron test"
-        },
-        "actions":{
-            "start":"Start test",
-            "end":"Submit test"
-        },
-        "timeRemaining":"Time remaining"
+  "tests": {
+    "toulousePieron": {
+      "name": "Toulouse-Piéron test",
+      "shapesToMark": "You need to mark these objects",
+      "description": {
+        "1": "In the next task, you will receive 4 types of squares, you must find them and mark them (by clicking).",
+        "2": "There are a total of 8 types of squares, they look like this:",
+        "time": "You have 5 minutes to solve the task."
+      }
     },
-    "nav":{
-        "home":"Home",
-        "tests":"Tests",
-        "results":"Results",
-        "mockup":"Jelentkezés",
-        "settings":"Settings",
-        "openMenu":"Open navigation menu"
+    "chairLamp": {
+      "name": "Chair-Lamp test",
+      "shapesToMark": "You need to mark these objects",
+      "description": {
+        "time": "You have 5 minutes to solve the task."
+      }
+    },
+    "bourdon": {
+      "name": "Bourdon test",
+      "description": {
+        "1": "In the next task, you will see a 20*20 table with the letters of the English alphabet in it.",
+        "2": "The first letter of each line is highlighted, this letter must be checked in the given line.",
+        "time": "You have 5 minutes to solve the task."
+      }
+    },
+    "actions": {
+      "start": "Start",
+      "end": "Finish"
+    },
+    "timeRemaining": "Time left",
+    "performance": "Score",
+    "time": "Time",
+    "stats": {
+      "correctlyMarked": "Found",
+      "incorrectlyMarked": "Wrong",
+      "incorrectlyIgnored": "Didn't find"
     }
+  },
+  "colors": {
+    "green": "green",
+    "purple": "purple",
+    "red": "red"
+  },
+
+  "results": {
+    "noResults": "There are no results to this test."
+  },
+
+  "mockupForm": {
+    "firstName": "Last name",
+    "lastName": "First name",
+    "email": "Email address",
+    "submit": "Sign up"
+  },
+
+  "nav": {
+    "home": "Home",
+    "tests": "Tests",
+    "results": "Results",
+    "mockup": "Apply",
+    "settings": "Settings",
+    "openMenu": "Open the Navigation menu"
+  },
+
+  "error": "Something went wrong...",
+  "errors": {
+    "authNeeded": "To view this page you need authentication"
+  },
+
+  "homepage": {
+    "name": "Salva Vita Endowment",
+    "text": "We help - for young people looking for employment, job seekers with disabilities and companies can find each other."
+  }
 }
