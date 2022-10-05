@@ -16,6 +16,14 @@ export function Score(){
     return <>
         <div className='flex gap-6 pb-6 overflow-x-auto px-6 sm:px-0'>
             <div className='card text-center'>
+                <p>{t('tests.qualityOfAttention')}</p>
+                <p className='text-lg font-bold'>{(stats.qualityOfAttention*100).toFixed(2)}%</p>
+            </div>
+            <div className='card text-center'>
+                <p>{t('tests.extentOfAttention')}</p>
+                <p className='text-lg font-bold'>{stats.extentOfAttention}</p>
+            </div>
+            <div className='card text-center'>
                 <p>{t('tests.performance')}</p>
                 <p className='text-lg font-bold'>{(stats.score*100).toFixed(2)}%</p>
             </div>
@@ -36,8 +44,7 @@ export function Score(){
                 <p className='text-lg font-bold'>
                     {
                         (store.startTime != null && store.endTime != null) ?
-                            formatTime(store.endTime.getTime() - store.startTime.getTime()) :
-                            ""
+                            formatTime(store.endTime.getTime() - store.startTime.getTime()) : ""
                     }
                 </p>
             </div>
