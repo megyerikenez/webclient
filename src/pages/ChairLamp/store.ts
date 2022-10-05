@@ -1,4 +1,4 @@
-import { ChairLampResult, ChairLampResultAll, ChairLampResultItem } from '../../api';
+import { ChairLampResult, ChairLampResultItem } from '../../api';
 import { MAX_TIME, PIC_COUNT } from './Constants';
 import create, { useStore } from 'zustand';
 
@@ -11,18 +11,41 @@ import shallow from 'zustand/shallow';
 export interface ChairLampStats {
     time: number;
     score: number;
-    result: ChairLampResultAll
+    result: ChairLampResultItem
 }
 
-export function calcChairLampStats(result: ChairLampResultAll): ChairLampStats {
-    let {incorrectlyIgnored, incorrectlyMarked, correctlyMarked, correctlyIgnored} = result;
-    let pictureCount = incorrectlyIgnored+incorrectlyMarked+correctlyIgnored+correctlyMarked;
+export function calcChairLampStats(res: ChairLampResult): ChairLampStats {
+    /* let {incorrectlyIgnored, incorrectlyMarked, correctlyMarked, correctlyIgnored} = result;
+    let pictureCount = incorrectlyIgnored + incorrectlyMarked+correctlyIgnored+correctlyMarked;
     let score = (pictureCount - (incorrectlyIgnored+incorrectlyMarked))/pictureCount;
-    let time = result.endTime.getTime() - result.startTime.getTime();
-
+    let time = result.endTime.getTime() - result.startTime.getTime(); */
+    //let score = 0;
+    let time = 0;
+    
+    let result: ChairLampResultItem = {
+        incorrectlyMarked: 0,
+        incorrectlyIgnored: 0,
+        correctlyMarked: 0,
+        correctlyIgnored: 0,
+        picturesRevised: 0
+    }
+    
+    for (let i = 0; i < res.values.length; i++) {
+        const element = res.values[i];
+        result.incorrectlyMarked += element.incorrectlyMarked;
+        result.incorrectlyIgnored += element.incorrectlyIgnored;
+        result.correctlyMarked += element.correctlyMarked;
+        result.correctlyIgnored += element.correctlyIgnored;
+        result.picturesRevised += element.picturesRevised;
+    }
+    console.log(result);
+    
+    
+    let score = (result.picturesRevised - (result.incorrectlyIgnored + result.incorrectlyMarked)) / result.picturesRevised;
+    
     return {
-        score,
         time,
+        score,
         result
     }
 }
@@ -83,7 +106,6 @@ export const useTestStore = create<TestState>((set) => ({
     }),
     getResults(): ChairLampResult {
 
-        console.log(this.startTime, this.endTime);
         this.endTime = new Date();
         
         if (this.startTime == null || this.endTime == null){
@@ -91,11 +113,6 @@ export const useTestStore = create<TestState>((set) => ({
         }
 
         let store = this;
-
-        let incorrectlyMarked = 0;
-        let incorrectlyIgnored = 0;
-        let correctlyMarked = 0;
-        let correctlyIgnored = 0;
 
         let res: ChairLampResultItem = {
             incorrectlyMarked: 0,
@@ -116,27 +133,25 @@ export const useTestStore = create<TestState>((set) => ({
                 {...res}
             ]
         };
-
-        for(let i = 0; i <= store.picturesRevised; i++){
+        
+        for(let i = 0; i < store.picturesRevised; i++){
             let item = store.pictures[i];
+            
             let isMarked = item.marked;
             let shouldMark = store.picturesToFind.includes(item.pictureIdx);
+
+            result.values[item.minute-1].picturesRevised++;
             
             if (isMarked && shouldMark){
-                correctlyMarked++;
                 result.values[item.minute-1].correctlyMarked++;
             } else if (!isMarked && shouldMark){
-                incorrectlyIgnored++;
                 result.values[item.minute-1].incorrectlyIgnored++;
             } else if (isMarked && !shouldMark){
-                incorrectlyMarked++;
                 result.values[item.minute-1].incorrectlyMarked++;
             } else if (!isMarked && !shouldMark){
-                correctlyIgnored++;
                 result.values[item.minute-1].correctlyIgnored++;
             }
         }
-        console.log(result);
 
         return result;
 
@@ -146,6 +161,7 @@ export const useTestStore = create<TestState>((set) => ({
         return { hasEnded: true, endTime: new Date() };
     }),
     toggleMarked: (marked) => set(produce((state: TestState) => {
+        
         state.pictures.map(pic => pic.selected = false);
         let elem = state.pictures.find((e) => e.positionIdx === state.picturesRevised);
         if (elem !== undefined){
@@ -155,11 +171,14 @@ export const useTestStore = create<TestState>((set) => ({
             
             if(state.startTime != undefined)
                 state.pictures[state.picturesRevised].minute = Math.ceil((Date.now() - state.startTime.getTime()) / 60000);
-            if(state.picturesRevised+1 < state.pictures.length)
-                state.pictures[state.picturesRevised+1].selected = true;
+            
             state.picturesRevised++;
             
+            if(state.picturesRevised < state.pictures.length)
+                state.pictures[state.picturesRevised].selected = true;
+            
         }
+        
     })),
     
 }));
