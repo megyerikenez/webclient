@@ -18,6 +18,12 @@
     @apply text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none focus:ring-4 focus:ring-blue-300
     contrast-more:bg-yellow-300 contrast-more:hover:bg-yellow-300 contrast-more:text-black contrast-more:font-bold contrast-more:focus:ring-white
   }
+  .table-row {
+      @apply bg-white border-b dark:bg-gray-800 dark:border-gray-700
+  }
+  .table-row td {
+    @apply py-4 px-6
+  }
   
   h1 {
     @apply text-2xl font-bold;
