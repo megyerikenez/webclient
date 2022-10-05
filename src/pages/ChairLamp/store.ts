@@ -11,6 +11,8 @@ import shallow from 'zustand/shallow';
 
 export interface ChairLampStats {
     time: number;
+    qualityOfAttention: number,
+    extentOfAttention: number,
     score: number;
     result: ChairLampResultItem
 }
@@ -26,19 +28,28 @@ export function calcChairLampStats(res: ChairLampResult): ChairLampStats {
         picturesRevised: 0
     }
     
+    let minRevised = Number.MAX_VALUE, maxRevised = 0;
     for (let i = 0; i < res.values.length; i++) {
         const element = res.values[i];
+        if(minRevised > element.picturesRevised)
+            minRevised = element.picturesRevised;
+        if(maxRevised < element.picturesRevised)
+            maxRevised = element.picturesRevised;
         result.incorrectlyMarked += element.incorrectlyMarked;
         result.incorrectlyIgnored += element.incorrectlyIgnored;
         result.correctlyMarked += element.correctlyMarked;
         result.correctlyIgnored += element.correctlyIgnored;
         result.picturesRevised += element.picturesRevised;
-    }    
+    }
     
+    let qualityOfAttention = (result.incorrectlyMarked + result.incorrectlyIgnored) / result.picturesRevised;
+    let extentOfAttention = maxRevised - minRevised;
     let score = (result.picturesRevised - (result.incorrectlyIgnored + result.incorrectlyMarked)) / result.picturesRevised;
     
     return {
         time,
+        qualityOfAttention,
+        extentOfAttention,
         score,
         result
     }

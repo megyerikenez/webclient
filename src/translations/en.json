@@ -31,6 +31,8 @@
       "end": "Finish"
     },
     "timeRemaining": "Time left",
+    "qualityOfAttention": "Quality of attention",
+    "extentOfAttention": "Extent of attention",
     "performance": "Score",
     "time": "Time",
     "stats": {

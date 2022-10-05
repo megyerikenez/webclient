@@ -31,6 +31,8 @@
       "end": "Befejezés"
     },
     "timeRemaining": "Hátralévő idő",
+    "qualityOfAttention": "Figyelem minősége",
+    "extentOfAttention": "Figyelem terjedelme",
     "performance": "Teljesítmény",
     "time": "Idő",
     "stats": {
