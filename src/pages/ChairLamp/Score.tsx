@@ -1,4 +1,5 @@
 import { PIC_COUNT } from './Constants';
+import { ResultItem } from './ResultItem';
 import { formatTime } from '../../util';
 import { useTestStore } from './store';
 import { useTranslation } from 'react-i18next';
@@ -20,22 +21,35 @@ export function Score(){
 
     for(let i = 0; i < store.pictures.length; i++){
         let item = store.pictures[i];
-        /* let isMarked = store.pictures.findIndex(e => e.marked) != -1; */
         let isMarked = item.marked;
-        console.log(isMarked);
-        
         let shouldMark = store.picturesToFind.includes(item.pictureIdx);
+
+        console.log();
         
+        if(item.minute != undefined)
+            store.increasePicturesRevised(1);
+        /*
         if (isMarked && shouldMark){
             correctlyMarked++;
+            if(item.minute != undefined)
+                store.result[0].correctlyMarked++;
         } else if (!isMarked && shouldMark){
             incorrectlyIgnored++;
+            if(item.minute != undefined)
+                store.result[0].incorrectlyIgnored++;
         } else if (isMarked && !shouldMark){
             incorrectlyMarked++;
+            if(item.minute != undefined)
+                store.result[0].incorrectlyMarked++;
         } else if (!isMarked && !shouldMark){
             correctlyIgnored++;
-        }
+            if(item.minute != undefined)
+                store.result[0].correctlyIgnored++;
+        } */
     }
+
+    console.log(store.result);
+    
     
     let pictureCount = PIC_COUNT;
 

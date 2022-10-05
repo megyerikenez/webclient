@@ -21,8 +21,8 @@ export function ChairLampPage(){
 }
 
 export function ChairLamp(){
-    let store = useTestStore(({startTime, endTime, hasStarted, hasEnded, endTest, startTest, toggleMarked, pictures, picturesToFind}) => ({
-        startTime, endTime, hasStarted, hasEnded, endTest, startTest, toggleMarked, pictures, picturesToFind
+    let store = useTestStore(({startTime, endTime, hasStarted, hasEnded, endTest, startTest, toggleMarked, pictures, picturesRevised, picturesToFind, result}) => ({
+        startTime, endTime, hasStarted, hasEnded, endTest, startTest, toggleMarked, pictures, picturesRevised, picturesToFind, result
     }), shallow);
 
     if (!store.hasStarted || store.startTime == null){
@@ -103,29 +103,6 @@ export function ChairLamp(){
                     alignItems: 'stretch',
                 }}
             >
-                <div
-                    style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        gap: 5,
-                    }}
-                >
-                    {store.pictures.map((row, index)=>{
-                        return <>
-                        {/* <span
-                            className='font-sm w-8'
-                            style={{
-                                display: 'flex',
-                                flexShrink: 0,
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                flexGrow: 1,
-                            }}
-                        >{index+1}</span> */}
-                        </>
-                    })}
-                </div>
-
                 <div>
                 {
 					store.pictures.map(pic => {
@@ -138,7 +115,47 @@ export function ChairLamp(){
         <div>
             {
                 hasEnded ? <>
-                
+                    <table className='table-auto'>
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>átnézett képek száma</th>
+                                <th>hibák száma</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1. perc</td>
+                                <td>{store.result[0].picturesRevised}</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>2. perc</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>3. perc</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>4. perc</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>5. perc</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>ÖSSZESEN</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </>
                 :
                 <>
@@ -150,11 +167,21 @@ export function ChairLamp(){
                     >Befejezés</button>
                 </>
             }
-            
         </div>
-		<div className='w-full sticky bottom-0 left-0 p-1 text-center bg-slate-200'>
-			<button className="button-primary m-2" onClick={() => { store.toggleMarked(false) }}>Nem</button>
-			<button className="button-primary m-2" onClick={() => { store.toggleMarked(true) }}>Igen</button>
+		<div className='w-full fixed bottom-0 left-0 p-1 text-center bg-slate-200'>
+			<button disabled={store.hasEnded} className={"button-primary m-2" + (store.hasEnded ? " opacity-50" : "")} onClick={() => {
+                store.toggleMarked(false)
+                if(store.picturesRevised+1 >= store.pictures.length){
+                    store.endTest();
+                }
+            }}>Nem</button>
+			<button disabled={store.hasEnded} className={"button-primary m-2" + (store.hasEnded ? " opacity-50" : "")} onClick={() => {
+                if(store.startTime != undefined)
+                store.toggleMarked(true)
+                if(store.picturesRevised+1 >= store.pictures.length){
+                    store.endTest();
+                }
+            }}>Igen</button>
 		</div>
     </>;
 }
