@@ -1,11 +1,14 @@
-import Chair from '../../assets/icon-test/chair_black_24dp.svg'
-import Flower from '../../assets/icon-test/local_florist_black_24dp.svg'
-import Lamp from '../../assets/icon-test/light_black_24dp.svg'
-import Pizza from '../../assets/icon-test/local_pizza_black_24dp.svg'
-import Table from '../../assets/icon-test/table_restaurant_black_24dp.svg'
+import Bed from '../../assets/icon-test/bed.svg'
+import Chair from '../../assets/icon-test/chair.svg'
+import Coffee from '../../assets/icon-test/coffee.svg'
+import Flower from '../../assets/icon-test/flower.svg'
+import House from '../../assets/icon-test/house.svg'
+import Lamp from '../../assets/icon-test/lamp.svg'
+import Pizza from '../../assets/icon-test/pizza.svg'
+import Ship from '../../assets/icon-test/ship.svg'
 import { useTestStore } from './store'
 
-var imgRes = [Chair, Flower, Lamp, Pizza, Table];
+var imgRes = [Bed, Chair, Coffee, Flower, House, Lamp, Pizza, Ship];
 
 export function Picture(props: {posIdx?: number, picIdx?: number, res?: string, revised?: boolean, selected?: boolean}) {
     let { picturesToFind, pictures, hasEnded } = useTestStore(e=>e);
