@@ -13,6 +13,8 @@
       "name": "Chair-Lamp teszt",
       "shapesToMark": "Az alábbi alakzatokat kell bejelölnie",
       "description": {
+        "1": "A következő feladatban kapni fog 2 féle képet, azokat kell megtalálnia, és bejelölnie (kattintással).",
+        "2": "Összesen 8 fajta kép van, melyek az alábbi módon néznek ki:",
         "time": "A feladat megoldására 5 perc áll rendelkezésre."
       }
     },

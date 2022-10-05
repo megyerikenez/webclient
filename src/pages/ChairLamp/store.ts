@@ -16,11 +16,6 @@ export interface ChairLampStats {
 }
 
 export function calcChairLampStats(res: ChairLampResult): ChairLampStats {
-    /* let {incorrectlyIgnored, incorrectlyMarked, correctlyMarked, correctlyIgnored} = result;
-    let pictureCount = incorrectlyIgnored + incorrectlyMarked+correctlyIgnored+correctlyMarked;
-    let score = (pictureCount - (incorrectlyIgnored+incorrectlyMarked))/pictureCount;
-    let time = result.endTime.getTime() - result.startTime.getTime(); */
-    //let score = 0;
     let time = 0;
     
     let result: ChairLampResultItem = {
@@ -38,9 +33,7 @@ export function calcChairLampStats(res: ChairLampResult): ChairLampStats {
         result.correctlyMarked += element.correctlyMarked;
         result.correctlyIgnored += element.correctlyIgnored;
         result.picturesRevised += element.picturesRevised;
-    }
-    console.log(result);
-    
+    }    
     
     let score = (result.picturesRevised - (result.incorrectlyIgnored + result.incorrectlyMarked)) / result.picturesRevised;
     

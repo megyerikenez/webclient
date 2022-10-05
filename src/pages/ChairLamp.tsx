@@ -39,11 +39,9 @@ export function ChairLamp() {
 
         return <>
             <div className='px-6'>
-                <h1 className='mb-6'>Chair-Lamp teszt</h1>
-                <p>A következő feladatban kapni fog 2 féle képet, azokat kell megtalálnia, és bejelölnie (kattintással).</p>
-                <p>
-					Összesen { getImgRes().length } fajta kép van, azok az alábbi módon néznek ki:
-				</p>
+                <h1 className='mb-6'>{t("tests.chairLamp.name")}</h1>
+                <p>{t("tests.chairLamp.description.1")}</p>
+                <p>{t("tests.chairLamp.description.2")}</p>
                 <div className='my-2'>
                     {
 						getImgRes().map((res)=>{
@@ -53,13 +51,13 @@ export function ChairLamp() {
 						})
 					}
                 </div>
-                <p>A feladat megoldására 5 perc áll rendelkezésre.</p>
+                <p>{t("tests.toulousePieron.description.time")}</p>
                 <button
                     className='mt-6 button-primary'
                     onClick={() => {
                         store.startTest();
                     }}
-                >Kezdés</button>
+                >{t("tests.actions.start")}</button>
             </div>
         </>
     }
@@ -84,7 +82,7 @@ export function ChairLamp() {
                         <div
                             className='card text-center pb-2'
                         >
-                            <p>Az alábbi alakzatokat kell bejelölnie</p>
+                            <p>{t("tests.chairLamp.shapesToMark")}</p>
                             { store.picturesToFind.map(index =>{
                                 return <>
                                     <Picture picIdx={index} />
@@ -120,7 +118,7 @@ export function ChairLamp() {
                     store.endTest();
                     store.getResults();
                 }}
-            >Befejezés</button>
+            >{t("tests.actions.end")}</button>
 
         </div>
 		<div className='w-full fixed bottom-0 left-0 p-1 text-center bg-slate-200'>
