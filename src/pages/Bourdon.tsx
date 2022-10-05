@@ -93,7 +93,9 @@ export function Bourdon() {
               }}
               className="flex mb-6 gap-6 mx-6 sm:mx-0"
             >
-              <div className="card text-center pb-2"></div>
+              <div className="card text-center">
+                {t('tests.bourdon.description.2')}
+              </div>
               <Timer startTime={store.startTime} maxTime={MAX_TIME} />
             </div>
           </>
