@@ -96,15 +96,12 @@ export function ChairLamp() {
                 </>
             }
 
-            
-            
             <div
                 style={{
                     display: 'flex',
                     flexDirection: 'row',
                     alignItems: 'stretch',
-                }}
-            >
+                }}>
                 <div>
                 {
 					store.pictures.map(pic => {
@@ -116,6 +113,9 @@ export function ChairLamp() {
 
             <button
                 className='mx-6 sm:mx-0 mt-6 button-primary'
+                style={{
+                    marginBottom: '64px'
+                }}
                 onClick={() => {
                     store.endTest();
                     store.getResults();
@@ -123,62 +123,6 @@ export function ChairLamp() {
             >Befejezés</button>
 
         </div>
-        {/* <div>
-            {
-                hasEnded ? <>
-                    <table className='w-full text-sm text-left text-gray-500 dark:text-gray-400' style={{ margin: 'auto' }}>
-                        <thead className='text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'>
-                            <tr>
-                                <th scope="col" className="py-3 px-6"></th>
-                                <th scope="col" className="py-3 px-6">átnézett képek száma</th>
-                                <th scope="col" className="py-3 px-6">hibák száma</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr className='table-row'>
-                                <td>1. perc</td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr className='table-row'>
-                                <td>2. perc</td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr className='table-row'>
-                                <td>3. perc</td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr className='table-row'>
-                                <td>4. perc</td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr className='table-row'>
-                                <td>5. perc</td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr className='table-row'>
-                                <td>ÖSSZESEN</td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </>
-                :
-                <>
-                    <button
-                        className='mx-6 sm:mx-0 mt-6 button-primary'
-                        onClick={() => {
-                            store.endTest();
-                        }}
-                    >Befejezés</button>
-                </>
-            }
-        </div> */}
 		<div className='w-full fixed bottom-0 left-0 p-1 text-center bg-slate-200'>
 			<button disabled={store.hasEnded} className={"button-primary m-2" + (store.hasEnded ? " opacity-50" : "")} onClick={() => {
                 store.toggleMarked(false)

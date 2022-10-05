@@ -4,6 +4,7 @@ import create, { useStore } from 'zustand';
 
 import { PictureCell } from './PictureCell';
 import { ResultItem } from './ResultItem';
+import { getImgRes } from './Picture';
 import produce from 'immer';
 import { randomInt } from '../../util';
 import shallow from 'zustand/shallow';
@@ -67,7 +68,7 @@ interface TestState {
 function createData(){
     function randomPicture(idx: number): PictureCell {
         return {
-            pictureIdx: randomInt(0, 5),
+            pictureIdx: randomInt(0, 8),
             positionIdx: idx,
             minute: 1,
             revised: false,
@@ -75,7 +76,7 @@ function createData(){
             selected: false
         } as PictureCell;
     }
-    let picturesToFind: number[] = [0, 2];
+    let picturesToFind: number[] = [1, 5];
     
     let pictureCount = 0;
     let pictures = new Array(PIC_COUNT).fill(null).map(() => randomPicture(pictureCount++));   
@@ -157,7 +158,6 @@ export const useTestStore = create<TestState>((set) => ({
 
     },
     endTest: () => set((state) => {
-        // TODO submit test results to api
         return { hasEnded: true, endTime: new Date() };
     }),
     toggleMarked: (marked) => set(produce((state: TestState) => {
