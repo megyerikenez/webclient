@@ -15,8 +15,6 @@ interface TestState {
     picturesToFind: number[];
     pictures: PictureCell[];
     picturesRevised: number;
-    result: ResultItem[];
-    increasePicturesRevised: (minute: number) => void;
     startTest: () => void;
     endTest: () => void;
     toggleMarked: (marked: boolean) => void;
@@ -47,14 +45,6 @@ function createData(){
     }
 }
 
-let res = {
-    incorrectlyMarked: 0,
-    incorrectlyIgnored: 0,
-    correctlyMarked: 0,
-    correctlyIgnored: 0,
-    picturesRevised: 0
-};
-
 export const useTestStore = create<TestState>((set) => ({
     hasStarted: false,
     hasEnded: false,
@@ -62,18 +52,7 @@ export const useTestStore = create<TestState>((set) => ({
     endTime: null,
     selected: [],
     picturesRevised: 0,
-    result: [
-        {...res} as ResultItem,
-        {...res} as ResultItem,
-        {...res} as ResultItem,
-        {...res} as ResultItem,
-        {...res} as ResultItem
-    ],
     ...createData(),
-    increasePicturesRevised: (minute: number) => set((state) => {
-        state.result[minute-1].picturesRevised++;
-        return { };
-    }),
     startTest: () => set((state) => {
         setTimeout(() => {
             if (!useTestStore.getState().hasEnded){
@@ -94,7 +73,6 @@ export const useTestStore = create<TestState>((set) => ({
             
             state.pictures[state.picturesRevised].marked = marked;
             state.pictures[state.picturesRevised].revised = true;
-            console.log(state.startTime);
             
             if(state.startTime != undefined)
                 state.pictures[state.picturesRevised].minute = Math.ceil((Date.now() - state.startTime.getTime()) / 60000);

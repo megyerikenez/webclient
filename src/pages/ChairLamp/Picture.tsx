@@ -17,8 +17,6 @@ export function Picture(props: {posIdx?: number, picIdx?: number, res?: string, 
         if (props.posIdx != undefined && props.picIdx != undefined && props.selected != undefined){
             let isSelected = pictures[props.posIdx].marked;
             let shouldMark = picturesToFind.includes(props.picIdx);
-            console.log(pictures[props.posIdx].marked);
-            
 
             if (isSelected && shouldMark){
                 bg = 'bg-lime-200';

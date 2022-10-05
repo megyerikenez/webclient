@@ -19,36 +19,48 @@ export function Score(){
     let correctlyMarked = 0;
     let correctlyIgnored = 0;
 
+    let res = {
+        incorrectlyMarked: 0,
+        incorrectlyIgnored: 0,
+        correctlyMarked: 0,
+        correctlyIgnored: 0,
+        picturesRevised: 0,
+    }
+
+    let result = [
+        {...res} as ResultItem,
+        {...res} as ResultItem,
+        {...res} as ResultItem,
+        {...res} as ResultItem,
+        {...res} as ResultItem
+    ]
+
     for(let i = 0; i < store.pictures.length; i++){
         let item = store.pictures[i];
         let isMarked = item.marked;
         let shouldMark = store.picturesToFind.includes(item.pictureIdx);
-
-        console.log();
         
         if(item.minute != undefined)
-            store.increasePicturesRevised(1);
-        /*
+            result[0].incorrectlyIgnored++;
+        
         if (isMarked && shouldMark){
             correctlyMarked++;
             if(item.minute != undefined)
-                store.result[0].correctlyMarked++;
+                result[0].correctlyMarked++;
         } else if (!isMarked && shouldMark){
             incorrectlyIgnored++;
             if(item.minute != undefined)
-                store.result[0].incorrectlyIgnored++;
+                result[0].incorrectlyIgnored++;
         } else if (isMarked && !shouldMark){
             incorrectlyMarked++;
             if(item.minute != undefined)
-                store.result[0].incorrectlyMarked++;
+                result[0].incorrectlyMarked++;
         } else if (!isMarked && !shouldMark){
             correctlyIgnored++;
             if(item.minute != undefined)
-                store.result[0].correctlyIgnored++;
-        } */
+                result[0].correctlyIgnored++;
+        }
     }
-
-    console.log(store.result);
     
     
     let pictureCount = PIC_COUNT;

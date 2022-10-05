@@ -21,8 +21,8 @@ export function ChairLampPage(){
 }
 
 export function ChairLamp(){
-    let store = useTestStore(({startTime, endTime, hasStarted, hasEnded, endTest, startTest, toggleMarked, pictures, picturesRevised, picturesToFind, result}) => ({
-        startTime, endTime, hasStarted, hasEnded, endTest, startTest, toggleMarked, pictures, picturesRevised, picturesToFind, result
+    let store = useTestStore(({startTime, endTime, hasStarted, hasEnded, endTest, startTest, toggleMarked, pictures, picturesRevised, picturesToFind}) => ({
+        startTime, endTime, hasStarted, hasEnded, endTest, startTest, toggleMarked, pictures, picturesRevised, picturesToFind
     }), shallow);
 
     if (!store.hasStarted || store.startTime == null){
@@ -115,41 +115,41 @@ export function ChairLamp(){
         <div>
             {
                 hasEnded ? <>
-                    <table className='table-auto'>
-                        <thead>
+                    <table className='w-full text-sm text-left text-gray-500 dark:text-gray-400' style={{ margin: 'auto' }}>
+                        <thead className='text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'>
                             <tr>
-                                <th></th>
-                                <th>átnézett képek száma</th>
-                                <th>hibák száma</th>
+                                <th scope="col" className="py-3 px-6"></th>
+                                <th scope="col" className="py-3 px-6">átnézett képek száma</th>
+                                <th scope="col" className="py-3 px-6">hibák száma</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <tr className='table-row'>
                                 <td>1. perc</td>
-                                <td>{store.result[0].picturesRevised}</td>
+                                <td></td>
                                 <td></td>
                             </tr>
-                            <tr>
+                            <tr className='table-row'>
                                 <td>2. perc</td>
                                 <td></td>
                                 <td></td>
                             </tr>
-                            <tr>
+                            <tr className='table-row'>
                                 <td>3. perc</td>
                                 <td></td>
                                 <td></td>
                             </tr>
-                            <tr>
+                            <tr className='table-row'>
                                 <td>4. perc</td>
                                 <td></td>
                                 <td></td>
                             </tr>
-                            <tr>
+                            <tr className='table-row'>
                                 <td>5. perc</td>
                                 <td></td>
                                 <td></td>
                             </tr>
-                            <tr>
+                            <tr className='table-row'>
                                 <td>ÖSSZESEN</td>
                                 <td></td>
                                 <td></td>
