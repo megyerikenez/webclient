@@ -101,6 +101,14 @@ export interface ToulousePieronResult {
   correctlyMarked: number;
   correctlyIgnored: number;
 }
+export interface ChairLampResultAll {
+    startTime: Date;
+    endTime: Date;
+    incorrectlyMarked: number;
+    incorrectlyIgnored: number;
+    correctlyMarked: number;
+    correctlyIgnored: number;
+  }
 export interface BourdonResult {
   startTime: Date;
   endTime: Date;
