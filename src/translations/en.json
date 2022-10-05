@@ -13,6 +13,8 @@
       "name": "Chair-Lamp test",
       "shapesToMark": "You need to mark these objects",
       "description": {
+        "1": "In the next task, you will receive 2 types of pictures, you must find them and mark them (by clicking).",
+        "2": "There are a total of 8 types of pictures, they look like this:",
         "time": "You have 5 minutes to solve the task."
       }
     },

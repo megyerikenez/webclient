@@ -1,12 +1,11 @@
+import { COL_COUNT, MAX_TIME, ROW_COUNT } from './Constants';
+import { ToulousePieronResult, sendToulousePieron } from '../../api';
+import { formatTime, randomInt } from '../../util';
+
 import create from 'zustand';
+import { i18next } from '../../i18n';
 import produce from 'immer';
 import toast from "react-hot-toast";
-
-import { COL_COUNT, MAX_TIME, ROW_COUNT } from './Constants';
-import { formatTime, randomInt } from '../../util';
-import { sendToulousePieron, ToulousePieronResult } from '../../api';
-
-import { i18next } from '../../i18n';
 
 interface SelectedEntry {
     row: number;
