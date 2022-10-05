@@ -1,4 +1,4 @@
-import { COL_COUNT, MAX_TIME, ROW_COUNT } from './Constants';
+import { MAX_TIME, PIC_COUNT } from './Constants';
 
 import { PictureCell } from './PictureCell';
 import create from 'zustand';
@@ -23,30 +23,21 @@ interface TestState {
     toggleMarked: (marked: boolean) => void;
 }
 
-
-
 function createData(){
     function randomPicture(idx: number): PictureCell {
         return {
             pictureIdx: randomInt(0, 5),
             positionIdx: idx,
+            minute: 1,
             revised: false,
             marked: false,
             selected: false
         } as PictureCell;
     }
     let picturesToFind: number[] = [0, 2];
-    /* while(picturesToFind.length !== 4){
-        let n = randomPicture();
-        if (picturesToFind.includes(n)){
-            continue;
-        }
-        picturesToFind.push(n);
-    } */
     
     let pictureCount = 0;
-    let pictures = new Array(200).fill(null).map(() => randomPicture(pictureCount++));   
-    pictures[0].revised = true;
+    let pictures = new Array(PIC_COUNT).fill(null).map(() => randomPicture(pictureCount++));   
     pictures[0].selected = true;
 
     return {
@@ -76,16 +67,21 @@ export const useTestStore = create<TestState>((set) => ({
         // TODO submit test results to api
         return { hasEnded: true, endTime: new Date() };
     }),
-    toggleMarked: (marked) => set(produce((state: TestState)=>{
+    toggleMarked: (marked) => set(produce((state: TestState) => {
         state.pictures.map(pic => pic.selected = false);
         let elem = state.pictures.find((e) => e.positionIdx === state.picturesRevised);
         if (elem !== undefined){
-            elem.marked = marked;
-            elem.revised = true;
-            elem.selected = true;
+            
+            state.pictures[state.picturesRevised].marked = marked;
+            state.pictures[state.picturesRevised].revised = true;
+            
+            if(state.startTime != undefined)
+                state.pictures[state.picturesRevised].minute = Math.ceil((Date.now() - state.startTime.getTime()) / 60000);
+            if(state.picturesRevised+1 < state.pictures.length)
+                state.pictures[state.picturesRevised+1].selected = true;
             state.picturesRevised++;
+            
         }
     })),
     
 }));
-  
