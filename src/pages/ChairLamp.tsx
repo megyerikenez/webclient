@@ -23,8 +23,8 @@ export function ChairLampPage() {
 
 export function ChairLamp() {
     const [t, i18n] = useTranslation("common");
-    let store = useTestStore(({startTime, endTime, hasStarted, hasEnded, endTest, startTest, toggleMarked, pictures, picturesRevised, picturesToFind}) => ({
-        startTime, endTime, hasStarted, hasEnded, endTest, startTest, toggleMarked, pictures, picturesRevised, picturesToFind
+    let store = useTestStore(({startTime, endTime, hasStarted, hasEnded, endTest, startTest, toggleMarked, getResults, pictures, picturesRevised, picturesToFind}) => ({
+        startTime, endTime, hasStarted, hasEnded, endTest, startTest, toggleMarked, getResults, pictures, picturesRevised, picturesToFind
     }), shallow);
 
     if (!store.hasStarted || store.startTime == null){
@@ -39,10 +39,10 @@ export function ChairLamp() {
 
         return <>
             <div className='px-6'>
-                <h1 className='mb-6'>Toulouse-Piéron teszt</h1>
-                <p>A következő feladatban kapni fog 4 féle négyzetet, azokat kell megtalálnia, és bejelölnie (kattintással).</p>
+                <h1 className='mb-6'>Chair-Lamp teszt</h1>
+                <p>A következő feladatban kapni fog 2 féle képet, azokat kell megtalálnia, és bejelölnie (kattintással).</p>
                 <p>
-					Összesen { getImgRes().length } fajta négyzet van, azok az alábbi módon néznek ki:
+					Összesen { getImgRes().length } fajta kép van, azok az alábbi módon néznek ki:
 				</p>
                 <div className='my-2'>
                     {
@@ -113,6 +113,15 @@ export function ChairLamp() {
 				}
                 </div>
             </div>
+
+            <button
+                className='mx-6 sm:mx-0 mt-6 button-primary'
+                onClick={() => {
+                    store.endTest();
+                    store.getResults();
+                }}
+            >Befejezés</button>
+
         </div>
         {/* <div>
             {
@@ -175,6 +184,7 @@ export function ChairLamp() {
                 store.toggleMarked(false)
                 if(store.picturesRevised+1 >= store.pictures.length){
                     store.endTest();
+                    store.getResults();
                 }
             }}>Nem</button>
 			<button disabled={store.hasEnded} className={"button-primary m-2" + (store.hasEnded ? " opacity-50" : "")} onClick={() => {
@@ -182,6 +192,7 @@ export function ChairLamp() {
                 store.toggleMarked(true)
                 if(store.picturesRevised+1 >= store.pictures.length){
                     store.endTest();
+                    store.getResults();
                 }
             }}>Igen</button>
 		</div>
