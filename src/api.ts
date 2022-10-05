@@ -29,8 +29,12 @@ export function getToken() {
   return localStorage.getItem("token");
 }
 
+function toApiDate(date: Date): string {
+  return date.toISOString().replace('T',' ').replace('Z','');
+}
+
 export function sendPostRequest<T>(url: string, data: Object) {
-  return axios.request<T>({
+  let promise: Promise<T> = axios.request<T>({
     url: API_ROOT + url,
     method: "POST",
     headers: {
@@ -42,11 +46,26 @@ export function sendPostRequest<T>(url: string, data: Object) {
       lang: i18next.language,
       token: getToken(),
     }),
-  });
+  }).then(r=>r.data);
+  return promise;
 }
 
 export function sendMockupForm(args: MockupFormData) {
   return sendPostRequest("/register", args);
+}
+export function sendToulousePieron(data: ToulousePieronResult){
+  return sendPostRequest("/submit-test/toulouse-pieron",{
+    ...data,
+    startTime: toApiDate(data.startTime),
+    endTime: toApiDate(data.endTime)
+  });
+}
+export function sendBourdon(data: BourdonResult){
+  return sendPostRequest("/submit-test/bourdon",{
+    ...data,
+    startTime: toApiDate(data.startTime),
+    endTime: toApiDate(data.endTime)
+  });
 }
 
 export function calculateToulousePieronScore({
@@ -62,19 +81,19 @@ export function calculateToulousePieronScore({
   return score;
 }
 
-interface ChairLampResultItem {
+export interface ChairLampResultItem {
   incorrectlyMarked: number;
   incorrectlyIgnored: number;
   correctlyMarked: number;
   correctlyIgnored: number;
   picturesRevised: number;
 }
-interface ChairLampResult {
+export interface ChairLampResult {
   startTime: Date;
   endTime: Date;
   values: ChairLampResultItem[];
 }
-interface ToulousePieronResult {
+export interface ToulousePieronResult {
   startTime: Date;
   endTime: Date;
   incorrectlyMarked: number;
@@ -82,7 +101,7 @@ interface ToulousePieronResult {
   correctlyMarked: number;
   correctlyIgnored: number;
 }
-interface BourdonResult {
+export interface BourdonResult {
   startTime: Date;
   endTime: Date;
   incorrectlyMarked: number;
@@ -93,13 +112,13 @@ interface BourdonResult {
   charsViewed: number;
 }
 export interface Results {
-  toulousePieron: ToulousePieronResult[];
-  chairLamp: ChairLampResult[];
-  bourdon: BourdonResult[];
+  toulousePieronResult: ToulousePieronResult[];
+  chairLampResult: ChairLampResult[];
+  bourdonResult: BourdonResult[];
 }
 
 function requestResults() {
-  return sendPostRequest<Results>("/results", {}).then((r) => r.data);
+  return sendPostRequest<Results>("/results", {});
 }
 
 function convertUTCDateToLocalDate(date: Date): Date {
@@ -122,24 +141,24 @@ function fixDate(r: any) {
   r.endTime = parseDate(r.endTime);
 }
 
-/*export function getResults() {
+export function getResults() {
     return requestResults().then(results=>{
         
-        results.toulousePieron.forEach(el=>{
+        results.toulousePieronResult.forEach(el=>{
             fixDate(el);
         })
-        results.chairLamp.forEach(el=>{
+        results.chairLampResult.forEach(el=>{
             fixDate(el);
         })
-        results.bourdon.forEach(el=>{
+        results.bourdonResult.forEach(el=>{
             fixDate(el);
         })
 
         return results;
     });
-}*/
+}
 
-export function getResults() {
+/*export function getResults() {
   return new Promise<Results>((resolve, reject) => {
     setTimeout(() => {
       resolve({
@@ -174,4 +193,4 @@ export function getResults() {
       });
     }, 1000);
   });
-}
+}*/

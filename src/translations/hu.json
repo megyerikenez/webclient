@@ -20,7 +20,7 @@
             "name":"Bourdon teszt",
             "description":{
                 "1":"A következő feladatban egy 20*20-as táblázatot fog látni benne az Angol ábécé betűivel.",
-                "2":"Az minden sor első betűje ki van emelve, ezt a betűt kell bejelölni az adott sorban.",
+                "2":"Minden sor első betűje ki van emelve, ezt a betűt kell bejelölni az adott sorban.",
                 "time":"A feladat megoldására 5 perc áll rendelkezésre."
             }
         },
@@ -35,8 +35,16 @@
             
             "correctlyMarked":"Megtalált",
             "incorrectlyMarked":"Hibás",
-            "incorrectlyIgnored":"Megtalálatlan"
+            "incorrectlyIgnored":"Megtalálatlan",
             
+            "attentionPerformance":"Figyelmi teljesítmény",
+            "workAccuracy":"Pontosság",
+            "mentalProductivity":"Mentális produktivitás",
+            "mentalPerformance":"Mentális teljesítmény",
+            "concentration":"Koncentráció",
+            "concentrationStability":"Koncentráció stabilitása",
+            "visualInformationCapacity":"Vizuális információ kapacitása",
+            "processingRate":"Feldolgozási ráta"
         }
     },
     "colors":{
@@ -73,5 +81,37 @@
     "homepage":{
         "name":"Salva Vita Alapítvány",
         "text":"Segítünk, hogy az elhelyezkedni vágyó fiatalok, a fogyatékkal élő álláskeresők és a cégek egymásra találjanak."
+    },
+
+    "loaders":{
+        "generic":{
+            "error":"Hiba történt"
+        },
+        "signup":{
+            "loading":"Küldés folyamatban",
+            "success":"Sikeres jelentkezés"
+        },
+        "test":{
+            "loading":"Eredmény elküldése",
+            "success":"Sikeresen elküldve",
+            "error":"Küldés sikertelen"
+        },
+        "data":{
+            "loading":"Adatok lekérése",
+            "success":"Betöltve",
+            "error":"Adatok lekérése sikertelen"
+        }
+    },
+
+    "scoreNames":{
+        "veryBad":"Nagyon rossz",
+        "bad":"Rossz",
+        "average":"Átlagos",
+        "good":"Jó",
+        "veryGood":"Nagyon jó",
+
+        "low":"Alacsony",
+        "high":"Magas",
+        "veryHigh":"Nagyon magas"
     }
 }

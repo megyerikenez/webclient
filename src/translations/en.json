@@ -33,8 +33,17 @@
     "time": "Time",
     "stats": {
       "correctlyMarked": "Found",
-      "incorrectlyMarked": "Wrong",
-      "incorrectlyIgnored": "Didn't find"
+      "incorrectlyMarked": "Incorrect",
+      "incorrectlyIgnored": "Not found",
+
+      "attentionPerformance":"Attention performance",
+      "workAccuracy":"Work accuracy",
+      "mentalProductivity":"Mental productivity",
+      "mentalPerformance":"Mental performance",
+      "concentration":"Concentration",
+      "concentrationStability":"Concentration stability",
+      "visualInformationCapacity":"Capacity of visual information",
+      "processingRate":"Processing rate"
     }
   },
   "colors": {

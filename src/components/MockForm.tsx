@@ -111,9 +111,9 @@ export default function MockForm() {
                   email,
                 }),
                 {
-                  loading: "Kapcsolodás",
-                  success: <b>Sikeres jelentkezés</b>,
-                  error: <b>Valami problémába ütköztünk...</b>,
+                  loading: t('loaders.signup.loading'),
+                  success: <b>{t('loaders.signup.success')}</b>,
+                  error: <b>{t('loaders.generic.error')}</b>,
                 }
               );
             }
