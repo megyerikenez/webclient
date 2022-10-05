@@ -4,8 +4,10 @@ import { calculateToulousePieronScore, getResults, Results as ResultsData } from
 import { Loader } from "../components/Loader";
 import { LoaderPage } from "../components/LoaderPage";
 import { useTranslation } from "react-i18next";
-import { formatDate } from "../util";
+import { formatDate, formatTime } from "../util";
 import toast from "react-hot-toast";
+import { calcToulousePieronStats } from "./ToulousePieron/store";
+import { calcBourdonStats } from "./Bourdon/store";
 
 function ResultsPage() {
   return (
@@ -65,6 +67,7 @@ function Results(){
               flex
               flex-col
               lg:flex-row
+              gap-6
             "
           >
             <div className="flex-1 mb-6">
@@ -83,9 +86,10 @@ function Results(){
 
               {
                 results.toulousePieronResult.length > 0 ? results.toulousePieronResult.map(result=>{
+                  let stats = calcToulousePieronStats(result);
                   return <div className="card mt-6 mx-auto" key={result.startTime.toISOString()}>
                       <p>
-                        {t('tests.performance')}: <span className="font-bold">{(calculateToulousePieronScore(result)*100).toFixed(2)}%</span>
+                        {t('tests.performance')}: <span className="font-bold">{(stats.score*100).toFixed(2)}%</span>
                       </p>
                       <p>
                         {t('tests.stats.correctlyMarked')}: <span className="font-bold">{result.correctlyMarked}</span>
@@ -95,6 +99,9 @@ function Results(){
                       </p>
                       <p>
                         {t('tests.stats.incorrectlyMarked')}: <span className="font-bold">{result.incorrectlyMarked}</span>
+                      </p>
+                      <p>
+                        {t('tests.time')}: <span className="font-bold">{formatTime(stats.time)}</span>
                       </p>
                       <p className="text-right">{formatDate(result.startTime)}</p>
                    </div>
@@ -106,10 +113,19 @@ function Results(){
               <h2 className="text-center">{t('tests.bourdon.name')}</h2>
               {
                 results.bourdonResult.length > 0 ? results.bourdonResult.map(result=>{
+                  let stats = calcBourdonStats(result);
                   return <div className="card mt-6 mx-auto" key={result.startTime.toISOString()}>
-                      
+                      <p>
+                        {t('tests.stats.concentration')}: <span className="font-bold">{stats.concentration.toFixed(2)} ({t("scoreNames."+stats.concentrationKey)})</span>
+                      </p>
+                      <p>
+                        {t('tests.stats.concentration')}: <span className="font-bold">{stats.concentrationStability.toFixed(2)} ({t("scoreNames."+stats.concentrationStabilityKey)})</span>
+                      </p>
+                      <p>
+                        {t('tests.time')}: <span className="font-bold">{formatTime(stats.time)}</span>
+                      </p>
+                      <p className="text-right">{formatDate(result.startTime)}</p>
                   </div>
-                  
                 })
                 : <NoResults />
               }

@@ -78,6 +78,7 @@ export function calcBourdonStats(result: BourdonResult){
         processingRate,
 
         concentrationKey,
+        concentrationStabilityKey,
 
         result
     });
