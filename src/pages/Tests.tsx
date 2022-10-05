@@ -8,12 +8,16 @@ function Tests() {
 
   let tests = [
     {
-        name:"tests.toulousePieron.name",
-        path:"toulouse-pieron",
+      name:"tests.chairLamp.name",
+      path:"chair-lamp",
     },
     {
-        name:"tests.chairLamp.name",
-        path:"chair-lamp",
+      name:"tests.toulousePieron.name",
+      path:"toulouse-pieron",
+    },
+    {
+      name:"tests.bourdon.name",
+      path:"bourdon",
     }
   ];
 
@@ -21,11 +25,11 @@ function Tests() {
     <>
       <Navbar />
       <main>
-        <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto py-6 px-6 lg:px-8">
           <h1
             className="mb-6"
           >{t('nav.tests')}</h1>
-          <div>
+          <div className="flex gap-6 flex-wrap">
             { tests.map(test=>
                 <>
                   <div className="card">

@@ -5,6 +5,7 @@ import { Loader } from "../components/Loader";
 import { LoaderPage } from "../components/LoaderPage";
 import { useTranslation } from "react-i18next";
 import { formatDate } from "../util";
+import toast from "react-hot-toast";
 
 function ResultsPage() {
   return (
@@ -32,10 +33,16 @@ function Results(){
   
   useEffect(()=>{
     if (!dataPromise){
-      dataPromise = getResults()
-      dataPromise.catch(()=>{
-        alert("Hiba történt");
-      }).finally(()=>{
+      dataPromise = getResults();
+      toast.promise(
+        dataPromise,
+        {
+          loading: t('loaders.data.loading'),
+          success: <b>{t('loaders.data.success')}</b>,
+          error: <b>{t('loaders.data.error')}</b>,
+        }
+      );
+      dataPromise.finally(()=>{
         dataPromise = null;
       })
     }
@@ -63,8 +70,8 @@ function Results(){
             <div className="flex-1 mb-6">
               <h2 className="text-center">{t('tests.chairLamp.name')}</h2>
               {
-                results.chairLamp.length > 0 ? results.toulousePieron.map(result=>{
-                  return <div className="card mt-6 mx-auto" key={result.startDate.toISOString()}>
+                results.chairLampResult.length > 0 ? results.chairLampResult.map(result=>{
+                  return <div className="card mt-6 mx-auto" key={result.startTime.toISOString()}>
 
                   </div>
                 })
@@ -75,8 +82,8 @@ function Results(){
               <h2 className="text-center">{t('tests.toulousePieron.name')}</h2>
 
               {
-                results.toulousePieron.length > 0 ? results.toulousePieron.map(result=>{
-                  return <div className="card mt-6 mx-auto" key={result.startDate.toISOString()}>
+                results.toulousePieronResult.length > 0 ? results.toulousePieronResult.map(result=>{
+                  return <div className="card mt-6 mx-auto" key={result.startTime.toISOString()}>
                       <p>
                         {t('tests.performance')}: <span className="font-bold">{(calculateToulousePieronScore(result)*100).toFixed(2)}%</span>
                       </p>
@@ -89,7 +96,7 @@ function Results(){
                       <p>
                         {t('tests.stats.incorrectlyMarked')}: <span className="font-bold">{result.incorrectlyMarked}</span>
                       </p>
-                      <p className="text-right">{formatDate(result.startDate)}</p>
+                      <p className="text-right">{formatDate(result.startTime)}</p>
                    </div>
                 })
                 : <NoResults />
@@ -98,8 +105,8 @@ function Results(){
             <div className="flex-1 mb-6">
               <h2 className="text-center">{t('tests.bourdon.name')}</h2>
               {
-                results.bourdon.length > 0 ? results.toulousePieron.map(result=>{
-                  return <div className="card mt-6 mx-auto" key={result.startDate.toISOString()}>
+                results.bourdonResult.length > 0 ? results.bourdonResult.map(result=>{
+                  return <div className="card mt-6 mx-auto" key={result.startTime.toISOString()}>
                       
                   </div>
                   

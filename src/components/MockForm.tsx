@@ -1,6 +1,7 @@
-import { FormEvent, MutableRefObject, useRef, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { sendMockupForm } from "../api";
+import toast from "react-hot-toast";
 
 export default function MockForm() {
   let [firstName, setFirstName] = useState("");
@@ -8,13 +9,12 @@ export default function MockForm() {
   let [email, setEmail] = useState("");
   let form = useRef<HTMLFormElement>(null);
 
-  const [t, i18n] = useTranslation('common');
-
+  const [t, i18n] = useTranslation("common");
   return (
     <div className="block p-6 rounded-lg shadow-lg bg-white max-w-md">
       <form
         ref={form}
-        onSubmitCapture={(e: FormEvent)=>{
+        onSubmitCapture={(e: FormEvent) => {
           e.preventDefault();
         }}
       >
@@ -39,9 +39,11 @@ export default function MockForm() {
                 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
               required
               minLength={1}
-              placeholder={t('mockupForm.lastName')}
+              placeholder={t("mockupForm.lastName")}
               value={lastName}
-              onChange={(e)=>{setLastName(e.target.value)}}
+              onChange={(e) => {
+                setLastName(e.target.value);
+              }}
             />
           </div>
           <div className="form-group mb-6">
@@ -64,9 +66,11 @@ export default function MockForm() {
                 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
               required
               minLength={1}
-              placeholder={t('mockupForm.firstName')}
+              placeholder={t("mockupForm.firstName")}
               value={firstName}
-              onChange={(e)=>{setFirstName(e.target.value)}}
+              onChange={(e) => {
+                setFirstName(e.target.value);
+              }}
             />
           </div>
         </div>
@@ -90,19 +94,28 @@ export default function MockForm() {
             id="email"
             required
             pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"
-            placeholder={t('mockupForm.email')}
+            placeholder={t("mockupForm.email")}
             value={email}
-            onChange={(e)=>{setEmail(e.target.value)}}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
           />
         </div>
         <button
-          onClick={()=>{
-            if (form.current?.checkValidity()){
-              sendMockupForm({
-                firstName,
-                lastName,
-                email,
-              });
+          onClick={() => {
+            if (form.current?.checkValidity()) {
+              toast.promise(
+                sendMockupForm({
+                  firstName,
+                  lastName,
+                  email,
+                }),
+                {
+                  loading: t('loaders.signup.loading'),
+                  success: <b>{t('loaders.signup.success')}</b>,
+                  error: <b>{t('loaders.generic.error')}</b>,
+                }
+              );
             }
           }}
           type="submit"
@@ -125,7 +138,7 @@ export default function MockForm() {
       duration-150
       ease-in-out"
         >
-          {t('mockupForm.submit')}
+          {t("mockupForm.submit", "key") as string}
         </button>
       </form>
     </div>

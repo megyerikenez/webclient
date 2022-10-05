@@ -1,26 +1,28 @@
-import { COL_COUNT, MAX_TIME, ROW_COUNT } from './ToulousePieron/Constants';
-import { Picture, getImgRes } from './ChairLamp/Picture';
-import React, { useEffect, useState } from 'react';
+import { Picture, getImgRes } from "./ChairLamp/Picture";
 
-import Navbar from '../components/Navbar';
-import { Score } from './ChairLamp/Score';
-import { Timer } from '../components/Timer';
-import shallow from 'zustand/shallow'
-import { useTestStore } from './ChairLamp/store';
+import { MAX_TIME } from "./ChairLamp/Constants";
+import Navbar from "../components/Navbar";
+import { Score } from "./ChairLamp/Score";
+import { Timer } from "../components/Timer";
+import shallow from "zustand/shallow";
+import { useTestStore } from "./ChairLamp/store";
+import { useTranslation } from "react-i18next";
 
-export function ChairLampPage(){
-    return <>
+export function ChairLampPage() {
+  return (
+    <>
       <Navbar />
       <main>
         <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
           <ChairLamp />
         </div>
       </main>
-    
     </>
+  );
 }
 
-export function ChairLamp(){
+export function ChairLamp() {
+    const [t, i18n] = useTranslation("common");
     let store = useTestStore(({startTime, endTime, hasStarted, hasEnded, endTest, startTest, toggleMarked, pictures, picturesRevised, picturesToFind}) => ({
         startTime, endTime, hasStarted, hasEnded, endTest, startTest, toggleMarked, pictures, picturesRevised, picturesToFind
     }), shallow);
@@ -62,7 +64,7 @@ export function ChairLamp(){
         </>
     }
 
-    let hasEnded = store.hasEnded && store.endTime;    
+    let hasEnded = store.hasEnded && store.endTime;
 
     return <>
         <div>
@@ -112,7 +114,7 @@ export function ChairLamp(){
                 </div>
             </div>
         </div>
-        <div>
+        {/* <div>
             {
                 hasEnded ? <>
                     <table className='w-full text-sm text-left text-gray-500 dark:text-gray-400' style={{ margin: 'auto' }}>
@@ -167,7 +169,7 @@ export function ChairLamp(){
                     >Befejezés</button>
                 </>
             }
-        </div>
+        </div> */}
 		<div className='w-full fixed bottom-0 left-0 p-1 text-center bg-slate-200'>
 			<button disabled={store.hasEnded} className={"button-primary m-2" + (store.hasEnded ? " opacity-50" : "")} onClick={() => {
                 store.toggleMarked(false)

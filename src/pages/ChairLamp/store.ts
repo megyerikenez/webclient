@@ -20,8 +20,6 @@ interface TestState {
     toggleMarked: (marked: boolean) => void;
 }
 
-
-
 function createData(){
     function randomPicture(idx: number): PictureCell {
         return {
