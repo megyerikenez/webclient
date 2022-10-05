@@ -30,7 +30,7 @@ export function getToken() {
 }
 
 function toApiDate(date: Date): string {
-  return date.toISOString().replace('T',' ').replace('Z','');
+  return date.toISOString();
 }
 
 export function sendPostRequest<T>(url: string, data: Object) {
