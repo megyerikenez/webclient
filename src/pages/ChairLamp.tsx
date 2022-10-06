@@ -58,7 +58,7 @@ export function ChairLamp() {
                     className='mt-6 button-primary'
                     onClick={() => {
                         isCompleted('chair-lamp').then(value=>{
-                            if (value == false){
+                            if (value == false || true){
                               store.startTest();
                             } else {
                               toast.error(t('errors.completed'));

@@ -8,6 +8,7 @@ import { formatDate, formatTime } from "../util";
 import toast from "react-hot-toast";
 import { calcToulousePieronStats } from "./ToulousePieron/store";
 import { calcBourdonStats } from "./Bourdon/store";
+import { calcChairLampStats } from "./ChairLamp/store";
 
 function ResultsPage() {
   return (
@@ -47,8 +48,31 @@ export function InnerResults(props: {results: ResultsData}){
               <h2 className="text-center">{t('tests.chairLamp.name')}</h2>
               {
                 results.chairLampResult.length > 0 ? results.chairLampResult.map(result=>{
+                  let stats = calcChairLampStats(result);
                   return <div className="card mt-6 mx-auto" key={result.startTime.toISOString()}>
-
+                      <p>
+                        {t('tests.qualityOfAttention')}: <span className="font-bold">{((stats.qualityOfAttention || 0)*100).toFixed(2)}%</span>
+                      </p>
+                      <p>
+                        {t('tests.extentOfAttention')}: <span className="font-bold">{(stats.extentOfAttention).toFixed(0)}</span>
+                      </p>
+                      <p>
+                        {t('tests.qualityOfAttentionByMinute')}:
+                        {
+                          stats.qualityOfAttentionByMinute.map(e=>{
+                            if (!isNaN(e) && e){
+                              return <span className="font-bold"> {(e).toFixed(2)}%</span>
+                            }
+                          })
+                        }
+                      </p>
+                      <p>
+                        {t('tests.performance')}: <span className="font-bold">{((stats.score || 0)*100).toFixed(2)}%</span>
+                      </p>
+                      <p>
+                        {t('tests.time')}: <span className="font-bold">{formatTime(stats.time)}</span>
+                      </p>
+                    <p className="text-right">{formatDate(result.startTime)}</p>
                   </div>
                 })
                 : <NoResults />
