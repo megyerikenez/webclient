@@ -34,7 +34,7 @@ export function Score(){
                         <td className='px-2'>5. perc</td>
                     </tr>
                     <tr>
-                    {(stats.qualityOfAttentionByMinute.map((x) => (isNaN(x) ? <td>-</td> : <td>{Math.round(x*100)} %</td>)))}
+                    {(stats.qualityOfAttentionByMinute.map((x) => (isNaN(x) ? <td>-</td> : <td>{Math.round(x*100)}%</td>)))}
                     </tr>
                 </table>
             </div>
