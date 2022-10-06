@@ -4,11 +4,11 @@ import { MAX_TIME } from "./ChairLamp/Constants";
 import Navbar from "../components/Navbar";
 import { Score } from "./ChairLamp/Score";
 import { Timer } from "../components/Timer";
+import { isCompleted } from "../api";
 import shallow from "zustand/shallow";
+import toast from "react-hot-toast";
 import { useTestStore } from "./ChairLamp/store";
 import { useTranslation } from "react-i18next";
-import { isCompleted } from "../api";
-import toast from "react-hot-toast";
 
 export function ChairLampPage() {
   return (
