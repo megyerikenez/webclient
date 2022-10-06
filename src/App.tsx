@@ -14,6 +14,7 @@ import { i18next } from "./i18n";
 import { BourdonPage } from "./pages/Bourdon";
 import { AuthGuard } from "./components/AuthGuard";
 import { Toaster } from "react-hot-toast";
+import AdminPage from "./pages/AdminPage";
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
             path="/tests/bourdon"
             element={<AuthGuard component={<BourdonPage />} />}
           />
+          <Route path="/adminpage" element={<AdminPage />}></Route>
         </Routes>
       </I18nextProvider>
     </>
