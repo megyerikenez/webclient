@@ -7,6 +7,8 @@ import shallow from "zustand/shallow";
 import { Score } from "./ToulousePieron/Score";
 import Navbar from "../components/Navbar";
 import { useTranslation } from "react-i18next";
+import toast from "react-hot-toast";
+import { isCompleted } from "../api";
 
 export function ToulousePieronPage() {
   return (
@@ -76,7 +78,15 @@ export function ToulousePieron() {
           <button
             className="mt-6 button-primary"
             onClick={() => {
-              store.startTest();
+              isCompleted('toulouse-pieron').then(value=>{
+                if (value == false){
+                  store.startTest();
+                } else {
+                  toast.error(t('errors.completed'));
+                }
+              }).catch(err=>{
+                toast.error(t('error'));
+              });
             }}
           >
             {t("tests.actions.start")}

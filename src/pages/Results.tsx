@@ -26,36 +26,9 @@ function NoResults(){
   </p>
 }
 
-let dataPromise: Promise<ResultsData> | null = null;
-
-function Results(){
-  let [results, setResults] = useState<ResultsData | null>(null);
-
+export function InnerResults(props: {results: ResultsData}){
   const [t, i18n] = useTranslation('common');
-  
-  useEffect(()=>{
-    if (!dataPromise){
-      dataPromise = getResults();
-      toast.promise(
-        dataPromise,
-        {
-          loading: t('loaders.data.loading'),
-          success: <b>{t('loaders.data.success')}</b>,
-          error: <b>{t('loaders.data.error')}</b>,
-        }
-      );
-      dataPromise.finally(()=>{
-        dataPromise = null;
-      })
-    }
-    dataPromise.then(data=>setResults(data));
-  },[]);
-
-  
-
-  if (results == null){
-    return <LoaderPage />
-  }
+  let results = props.results;
 
   return <>
     <main>
@@ -133,6 +106,42 @@ function Results(){
           </div>
         </div>
     </main>
+  </>
+}
+
+let dataPromise: Promise<ResultsData> | null = null;
+
+function Results(){
+  let [results, setResults] = useState<ResultsData | null>(null);
+
+  const [t, i18n] = useTranslation('common');
+  
+  useEffect(()=>{
+    if (!dataPromise){
+      dataPromise = getResults();
+      toast.promise(
+        dataPromise,
+        {
+          loading: t('loaders.data.loading'),
+          success: <b>{t('loaders.data.success')}</b>,
+          error: <b>{t('loaders.data.error')}</b>,
+        }
+      );
+      dataPromise.finally(()=>{
+        dataPromise = null;
+      })
+    }
+    dataPromise.then(data=>setResults(data));
+  },[]);
+
+  
+
+  if (results == null){
+    return <LoaderPage />
+  }
+
+  return <>
+    <InnerResults results={results} />
   </>
 }
 

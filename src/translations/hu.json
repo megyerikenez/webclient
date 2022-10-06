@@ -79,7 +79,8 @@
 
   "error": "Hiba történt",
   "errors": {
-    "authNeeded": "Az oldal megtekindéséhez authentikációra van szükség"
+    "authNeeded": "Az oldal megtekindéséhez authentikációra van szükség",
+    "completed": "Ezt a teszt már ki van töltve"
   },
 
   "homepage": {
