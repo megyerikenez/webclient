@@ -4,7 +4,7 @@ import { i18next } from "./i18n";
 axios.defaults.headers.post["Content-Type"] = "application/json;charset=utf-8";
 axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
 
-let API_ROOT = "https://api.dvpc.hu/api";
+let API_ROOT = "https://e46f-185-9-19-90.eu.ngrok.io/api";
 
 interface MockupFormData {
   firstName: string;
@@ -34,37 +34,39 @@ function toApiDate(date: Date): string {
 }
 
 export function sendPostRequest<T>(url: string, data: Object) {
-  let promise: Promise<T> = axios.request<T>({
-    url: API_ROOT + url,
-    method: "POST",
-    headers: {
-      Accept: "*/*",
-      "Content-Type": "application/json",
-    },
-    data: JSON.stringify({
-      ...data,
-      lang: i18next.language,
-      token: getToken(),
-    }),
-  }).then(r=>r.data);
+  let promise: Promise<T> = axios
+    .request<T>({
+      url: API_ROOT + url,
+      method: "POST",
+      headers: {
+        Accept: "*/*",
+        "Content-Type": "application/json",
+      },
+      data: JSON.stringify({
+        ...data,
+        lang: i18next.language,
+        token: getToken(),
+      }),
+    })
+    .then((r) => r.data);
   return promise;
 }
 
 export function sendMockupForm(args: MockupFormData) {
   return sendPostRequest("/register", args);
 }
-export function sendToulousePieron(data: ToulousePieronResult){
-  return sendPostRequest("/submit-test/toulouse-pieron",{
+export function sendToulousePieron(data: ToulousePieronResult) {
+  return sendPostRequest("/submit-test/toulouse-pieron", {
     ...data,
     startTime: toApiDate(data.startTime),
-    endTime: toApiDate(data.endTime)
+    endTime: toApiDate(data.endTime),
   });
 }
-export function sendBourdon(data: BourdonResult){
-  return sendPostRequest("/submit-test/bourdon",{
+export function sendBourdon(data: BourdonResult) {
+  return sendPostRequest("/submit-test/bourdon", {
     ...data,
     startTime: toApiDate(data.startTime),
-    endTime: toApiDate(data.endTime)
+    endTime: toApiDate(data.endTime),
   });
 }
 
@@ -142,20 +144,19 @@ function fixDate(r: any) {
 }
 
 export function getResults() {
-    return requestResults().then(results=>{
-        
-        results.toulousePieronResult.forEach(el=>{
-            fixDate(el);
-        })
-        results.chairLampResult.forEach(el=>{
-            fixDate(el);
-        })
-        results.bourdonResult.forEach(el=>{
-            fixDate(el);
-        })
-
-        return results;
+  return requestResults().then((results) => {
+    results.toulousePieronResult.forEach((el) => {
+      fixDate(el);
     });
+    results.chairLampResult.forEach((el) => {
+      fixDate(el);
+    });
+    results.bourdonResult.forEach((el) => {
+      fixDate(el);
+    });
+
+    return results;
+  });
 }
 
 /*export function getResults() {

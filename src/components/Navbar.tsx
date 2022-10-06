@@ -2,11 +2,11 @@ import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import { Transition } from "@headlessui/react";
 import { useTranslation } from "react-i18next";
-import Logo from '../assets/salvavita.png';
+import Logo from "../assets/salvavita.png";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [t, i18n] = useTranslation('common');
+  const [t, i18n] = useTranslation("common");
   return (
     <div className="sticky top-0 z-50">
       <nav className="bg-gray-800">
@@ -14,11 +14,7 @@ export default function Navbar() {
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                <img
-                  className="h-8 w-8"
-                  src={Logo}
-                  alt="Salva Vita"
-                />
+                <img className="h-8 w-8" src={Logo} alt="Salva Vita" />
               </div>
               <div className="hidden md:block">
                 <div className="ml-6 flex items-baseline space-x-4">
@@ -26,34 +22,34 @@ export default function Navbar() {
                     to={"/"}
                     className=" hover:bg-gray-700 text-gray-300 px-3 py-2 rounded-md text-sm font-medium"
                   >
-                    {t('nav.home')}
+                    {t("nav.home")}
                   </Link>
 
                   <Link
                     to={"/tests"}
                     className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
-                    {t('nav.tests')}
+                    {t("nav.tests")}
                   </Link>
 
                   <Link
                     to={"/results"}
                     className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
-                    {t('nav.results')}
+                    {t("nav.results")}
                   </Link>
 
                   <Link
                     to={"/signup"}
                     className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
-                    {t('nav.mockup')}
+                    {t("nav.mockup")}
                   </Link>
                   <Link
                     to={"/settings"}
                     className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex-end"
                   >
-                    {t('nav.settings')}
+                    {t("nav.settings")}
                   </Link>
                 </div>
               </div>
@@ -66,7 +62,7 @@ export default function Navbar() {
                 aria-controls="mobile-menu"
                 aria-expanded="false"
               >
-                <span className="sr-only">{t('nav.openMenu')}</span>
+                <span className="sr-only">{t("nav.openMenu")}</span>
                 {!isOpen ? (
                   <svg
                     className="block h-6 w-6"
@@ -121,35 +117,35 @@ export default function Navbar() {
                   to={"/"}
                   className="hover:bg-gray-700 text-white block px-3 py-2 rounded-md text-base font-medium"
                 >
-                  {t('nav.home')}
+                  {t("nav.home")}
                 </Link>
 
                 <Link
                   to={"/tests"}
                   className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                 >
-                  {t('nav.tests')}
+                  {t("nav.tests")}
                 </Link>
 
                 <Link
                   to={"/results"}
                   className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                 >
-                  {t('nav.results')}
+                  {t("nav.results")}
                 </Link>
 
                 <Link
                   to={"/signup"}
                   className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                 >
-                  {t('nav.mockup')}
+                  {t("nav.mockup")}
                 </Link>
 
                 <Link
                   to={"/settings"}
                   className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                 >
-                  {t('nav.settings')}
+                  {t("nav.settings")}
                 </Link>
               </div>
             </div>
