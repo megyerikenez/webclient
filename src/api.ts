@@ -4,7 +4,7 @@ import { i18next } from "./i18n";
 axios.defaults.headers.post["Content-Type"] = "application/json;charset=utf-8";
 axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
 
-let API_ROOT = "https://api.salvavita.kess.hu/api";
+let API_ROOT = "https://api.dvpc.hu/api";
 
 interface MockupFormData {
   firstName: string;
