@@ -47,6 +47,7 @@ export function Admin(){
   return <>
     <div className="flex justify-center">
       <div className="w-3/4 mt-10">
+        <h1 className="mb-6 text-center">{t('nav.admin')}</h1>
         {
           data.map(user=>{
             return <>
