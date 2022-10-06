@@ -21,7 +21,7 @@ export interface ChairLampStats {
 }
 
 export function calcChairLampStats(res: ChairLampResult): ChairLampStats {
-    let time = 0;
+   
     
     let result: ChairLampResultItem = {
         incorrectlyMarked: 0,
@@ -58,6 +58,8 @@ export function calcChairLampStats(res: ChairLampResult): ChairLampStats {
     let extentOfAttention = maxRevised - minRevised;
     let score = (result.picturesRevised - (result.incorrectlyIgnored + result.incorrectlyMarked)) / result.picturesRevised;
     
+    let time = res.endTime.getTime() - res.startTime.getTime();
+
     return {
         time,
         qualityOfAttentionByMinute,
