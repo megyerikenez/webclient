@@ -1,4 +1,4 @@
-import { ChairLampResult, ChairLampResultItem } from '../../api';
+import { ChairLampResult, ChairLampResultItem, sendChairLamp } from '../../api';
 import { MAX_TIME, PIC_COUNT } from './Constants';
 import create, { useStore } from 'zustand';
 
@@ -8,6 +8,8 @@ import { getImgRes } from './Picture';
 import produce from 'immer';
 import { randomInt } from '../../util';
 import shallow from 'zustand/shallow';
+import i18next from 'i18next';
+import toast from 'react-hot-toast';
 
 export interface ChairLampStats {
     time: number;
@@ -186,3 +188,17 @@ export const useTestStore = create<TestState>((set) => ({
     })),
     
 }));
+useTestStore.subscribe((state,prev)=>{
+    if(prev.hasEnded == false && state.hasEnded == true){
+        let success = i18next.t('loaders.test.success', { ns: 'common' });
+        let error = i18next.t('loaders.test.error', { ns: 'common' });
+        toast.promise(sendChairLamp(state.getResults()),
+            {
+              loading: i18next.t('loaders.test.loading', { ns: 'common' }),
+              success: <b>{success}</b>,
+              error: <b>{error}</b>,
+            }
+        );
+        
+    }
+});

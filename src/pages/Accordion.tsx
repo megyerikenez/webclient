@@ -4,17 +4,10 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import * as React from "react";
-import { Results as Segglyuk } from "../api";
-import InnerResult from "../components/InnerResults";
+import { UserInfo } from "../api";
+import { InnerResults } from "./Results";
 
-interface IAccordionComponent {
-  firstName?: string;
-  timeSubmited?: string;
-  lastName?: string;
-  result?: Segglyuk;
-}
-
-export default function AccordionComponent(gecimre?: IAccordionComponent) {
+export default function AccordionComponent(props: {user: UserInfo}) {
   const [expanded, setExpanded] = React.useState<string | false>(false);
 
   const handleChange =
@@ -32,17 +25,15 @@ export default function AccordionComponent(gecimre?: IAccordionComponent) {
         id="panel1bh-header"
       >
         <Typography sx={{ width: "33%", flexShrink: 0 }}>
-          {gecimre?.firstName + " " + gecimre?.lastName}
+          {props.user.firstName + " " + props.user.lastName}
         </Typography>
         <Typography sx={{ color: "text.secondary" }}>
-          {gecimre?.timeSubmited}
+         
         </Typography>
       </AccordionSummary>
       <AccordionDetails>
-        <InnerResult // TODO CSINALDD MEG GABOOOOOOOOOOOO
-          toulousePieronResult={[]}
-          chairLampResult={[]}
-          bourdonResult={[]}
+        <InnerResults
+          results={props.user.results}
         />
       </AccordionDetails>
     </Accordion>

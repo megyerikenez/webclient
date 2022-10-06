@@ -4,7 +4,7 @@ import { i18next } from "./i18n";
 axios.defaults.headers.post["Content-Type"] = "application/json;charset=utf-8";
 axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
 
-let API_ROOT = "https://e46f-185-9-19-90.eu.ngrok.io/api";
+let API_ROOT = "https://api.dvpc.hu/api";
 
 interface MockupFormData {
   firstName: string;
@@ -31,6 +31,17 @@ export function getToken() {
 
 function toApiDate(date: Date): string {
   return date.toISOString();
+}
+
+export function sendGetRequest<T>(url: string, data: Object) {
+  let promise: Promise<T> = axios.request<T>({
+    url: API_ROOT + url,
+    method: "GET",
+    headers: {
+      Accept: "*/*",
+    }
+  }).then(r=>r.data);
+  return promise;
 }
 
 export function sendPostRequest<T>(url: string, data: Object) {
@@ -62,6 +73,13 @@ export function sendToulousePieron(data: ToulousePieronResult) {
     endTime: toApiDate(data.endTime),
   });
 }
+export function sendChairLamp(data: ChairLampResult){
+  return sendPostRequest("/submit-test/chair-lamp", {
+    ...data,
+    startTime: toApiDate(data.startTime),
+    endTime: toApiDate(data.endTime),
+  });
+}
 export function sendBourdon(data: BourdonResult) {
   return sendPostRequest("/submit-test/bourdon", {
     ...data,
@@ -82,6 +100,19 @@ export function calculateToulousePieronScore({
     (pictureCount - (incorrectlyIgnored + incorrectlyMarked)) / pictureCount;
   return score;
 }
+
+
+export interface Completion {
+  isCompleted: boolean;
+}
+
+export interface UserInfo {
+  firstName: string;
+  lastName: string;
+  email: string;
+  results: Results;
+}
+
 
 export interface ChairLampResultItem {
   incorrectlyMarked: number;
@@ -159,39 +190,29 @@ export function getResults() {
   });
 }
 
-/*export function getResults() {
-  return new Promise<Results>((resolve, reject) => {
-    setTimeout(() => {
-      resolve({
-        toulousePieron: [
-          {
-            startTime: new Date("2003-10-24"),
-            endTime: new Date(),
-            incorrectlyMarked: 15,
-            incorrectlyIgnored: 12,
-            correctlyMarked: 40,
-            correctlyIgnored: 30,
-          },
-          {
-            startTime: new Date("2003-9-24"),
-            endTime: new Date(),
-            incorrectlyMarked: 15,
-            incorrectlyIgnored: 12,
-            correctlyMarked: 40,
-            correctlyIgnored: 30,
-          },
-          {
-            startTime: new Date("2003-8-24"),
-            endTime: new Date(),
-            incorrectlyMarked: 15,
-            incorrectlyIgnored: 12,
-            correctlyMarked: 40,
-            correctlyIgnored: 30,
-          },
-        ],
-        chairLamp: [],
-        bourdon: [],
-      });
-    }, 1000);
-  });
-}*/
+export function isCompleted(testId: string): Promise<boolean> {
+  return sendPostRequest<Completion>("/test-completion/"+testId, {}).then(data=>data.isCompleted);
+}
+
+export function requestAdminData(){
+  return sendGetRequest<UserInfo[]>('/admin/results',{});
+}
+
+export function getAdminData() {
+  return requestAdminData().then(json=>{
+
+    json.forEach(user=>{
+      user.results.toulousePieronResult.forEach(el=>{
+          fixDate(el);
+      })
+      user.results.chairLampResult.forEach(el=>{
+          fixDate(el);
+      })
+      user.results.bourdonResult.forEach(el=>{
+          fixDate(el);
+      })
+    })
+
+    return json;
+  }); 
+}
