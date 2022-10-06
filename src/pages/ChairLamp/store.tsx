@@ -13,6 +13,7 @@ import toast from 'react-hot-toast';
 
 export interface ChairLampStats {
     time: number;
+    qualityOfAttentionByMinute: number[],
     qualityOfAttention: number,
     extentOfAttention: number,
     score: number;
@@ -30,18 +31,27 @@ export function calcChairLampStats(res: ChairLampResult): ChairLampStats {
         picturesRevised: 0
     }
     
+    let qualityOfAttentionByMinute = [];
     let minRevised = Number.MAX_VALUE, maxRevised = 0;
     for (let i = 0; i < res.values.length; i++) {
+
         const element = res.values[i];
+
         if(minRevised > element.picturesRevised)
             minRevised = element.picturesRevised;
         if(maxRevised < element.picturesRevised)
             maxRevised = element.picturesRevised;
+
         result.incorrectlyMarked += element.incorrectlyMarked;
         result.incorrectlyIgnored += element.incorrectlyIgnored;
         result.correctlyMarked += element.correctlyMarked;
         result.correctlyIgnored += element.correctlyIgnored;
         result.picturesRevised += element.picturesRevised;
+
+        qualityOfAttentionByMinute.push(
+            (element.incorrectlyMarked + element.incorrectlyIgnored) / element.picturesRevised
+        );
+
     }
     
     let qualityOfAttention = (result.incorrectlyMarked + result.incorrectlyIgnored) / result.picturesRevised;
@@ -50,6 +60,7 @@ export function calcChairLampStats(res: ChairLampResult): ChairLampStats {
     
     return {
         time,
+        qualityOfAttentionByMinute,
         qualityOfAttention,
         extentOfAttention,
         score,
