@@ -27,9 +27,9 @@ function Tests() {
       <main>
         <div className="max-w-7xl mx-auto py-6 px-6 lg:px-8">
           <h1
-            className="mb-6"
+            className="mb-6 text-center"
           >{t('nav.tests')}</h1>
-          <div className="flex gap-6 flex-wrap">
+          <div className="flex gap-6 flex-wrap justify-center">
             { tests.map(test=>
                 <>
                   <div className="card">

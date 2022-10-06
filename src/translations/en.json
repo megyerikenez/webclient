@@ -74,25 +74,27 @@
     "results": "Results",
     "mockup": "Apply",
     "settings": "Settings",
+    "admin":"Administration page",
     "openMenu": "Open the Navigation menu"
   },
 
   "error": "Something went wrong...",
   "errors": {
-    "authNeeded": "To view this page you need authentication"
+    "authNeeded": "To view this page you need authentication",
+    "completed": "You've already completed this test"
   },
 
   "homepage": {
     "name": "Salva Vita Endowment",
-    "text": "We help - for young people looking for employment, job seekers with disabilities and companies can find each other."
+    "text": "We help young people looking for employment, job seekers with disabilities and companies find each other."
   },
 
   "loaders": {
     "generic": {
-      "error": "Something went wrong..."
+      "error": "Something went wrong"
     },
     "signup": {
-      "loading": "Sending...",
+      "loading": "Sending",
       "success": "Successfully applied"
     },
     "test": {
