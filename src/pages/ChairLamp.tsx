@@ -7,6 +7,8 @@ import { Timer } from "../components/Timer";
 import shallow from "zustand/shallow";
 import { useTestStore } from "./ChairLamp/store";
 import { useTranslation } from "react-i18next";
+import { isCompleted } from "../api";
+import toast from "react-hot-toast";
 
 export function ChairLampPage() {
   return (
@@ -55,7 +57,15 @@ export function ChairLamp() {
                 <button
                     className='mt-6 button-primary'
                     onClick={() => {
-                        store.startTest();
+                        isCompleted('chair-lamp').then(value=>{
+                            if (value == false){
+                              store.startTest();
+                            } else {
+                              toast.error(t('errors.completed'));
+                            }
+                        }).catch(err=>{
+                            toast.error(t('error'));
+                        });
                     }}
                 >{t("tests.actions.start")}</button>
             </div>
@@ -95,6 +105,7 @@ export function ChairLamp() {
             }
 
             <div
+                className="mb-6"
                 style={{
                     display: 'flex',
                     flexDirection: 'row',
@@ -109,16 +120,20 @@ export function ChairLamp() {
                 </div>
             </div>
 
-            <button
-                className='mx-6 sm:mx-0 mt-6 button-primary'
-                style={{
-                    marginBottom: '64px'
-                }}
-                onClick={() => {
-                    store.endTest();
-                    store.getResults();
-                }}
-            >{t("tests.actions.end")}</button>
+            {
+                !hasEnded && <>
+                    <button
+                        className='mx-6 sm:mx-0 button-primary'
+                        
+                        onClick={() => {
+                            store.endTest();
+                            store.getResults();
+                        }}
+                    >{t("tests.actions.end")}</button>
+                </>
+            }
+
+            <div className="mb-16"></div>
 
         </div>
 		<div className='w-full fixed bottom-0 left-0 p-1 text-center bg-slate-200'>

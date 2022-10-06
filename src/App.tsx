@@ -42,7 +42,7 @@ function App() {
             path="/tests/bourdon"
             element={<AuthGuard component={<BourdonPage />} />}
           />
-          <Route path="/adminpage" element={<AdminPage />}></Route>
+          <Route path="/admin" element={<AdminPage />}></Route>
         </Routes>
       </I18nextProvider>
     </>

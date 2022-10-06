@@ -6,6 +6,8 @@ import shallow from "zustand/shallow";
 import { Score } from "./Bourdon/Score";
 import Navbar from "../components/Navbar";
 import { useTranslation } from "react-i18next";
+import { isCompleted } from "../api";
+import toast from "react-hot-toast";
 
 export function BourdonPage() {
   return (
@@ -65,7 +67,15 @@ export function Bourdon() {
           <button
             className="mt-6 button-primary"
             onClick={() => {
-              store.startTest();
+              isCompleted('bourdon').then(value=>{
+                if (value == false){
+                  store.startTest();
+                } else {
+                  toast.error(t('errors.completed'));
+                }
+              }).catch(err=>{
+                toast.error(t('error'));
+              });
             }}
           >
             {t("tests.actions.start")}
